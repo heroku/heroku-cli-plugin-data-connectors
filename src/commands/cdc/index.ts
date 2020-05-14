@@ -10,11 +10,11 @@ export default class CdcInfo extends BaseCommand {
   static aliases = ['cdc:info']
 
   static examples = [
-    '$ heroku cdc ad2a0126-aee2-4815-8e95-8367e3a2984b --app=my-app',
+    '$ heroku cdc ad2a0126-aee2-4815-8e95-8367e3a2984b',
+    '$ heroku cdc ad2a0126-aee2-4815-8e95-8367e3a2984b --json',
   ]
 
   static flags = {
-    app: flags.app({required: true}),
     json: flags.boolean({
       description: 'output in json format',
     }),
