@@ -19,16 +19,16 @@ export default class ConnectorsCreate extends BaseCommand {
       multiple: true,
       required: true,
     }),
+    app: flags.app(),
     exclude: flags.string({
       description: 'Columns to exclude',
       multiple: true,
     }),
-    // app: flags.app({required: true}),
   }
 
   static examples = [
     '$ heroku data:cdc:create kafka-lovely-12345 --postgres-addon postgresql-neato-98765 --table public.posts --table public.comments',
-    '$ heroku data:cdc:create kafka-lovely-12345 --postgres-addon postgresql-neato-98765 --table public.users --excluded-column public.users.password',
+    '$ heroku data:cdc:create kafka-lovely-12345 --postgres-addon postgresql-neato-98765 --table public.users --exclude public.users.password',
   ]
 
   async run() {
@@ -37,9 +37,6 @@ export default class ConnectorsCreate extends BaseCommand {
     const postgresAddon = flags['postgres-addon']
     const tables = flags.table
     const excluded = flags.exclude || []
-
-    console.log(tables)
-    console.log(excluded)
 
     cli.action.start('Creating Postgres Connector')
     const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka_tenant}`, {

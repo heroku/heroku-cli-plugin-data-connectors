@@ -17,14 +17,15 @@ export default abstract class Base extends Command {
   }
 }
 export interface PostgresConnector {
-  kafka_app: {name: string};
-  kafka_addon: {name: string; uuid: string};
-  postgres_app: {name: string};
-  postgres_addon: {name: string; uuid: string};
   uuid: string;
-  status: 'creating' | 'available';
   created_at: string;
-  tables: string[];
   excluded_columns: string[];
+  kafka_addon: {name: string; uuid: string};
+  kafka_app: {name: string};
+  name: string;
+  postgres_addon: {name: string; uuid: string};
+  postgres_app: {name: string};
+  status: 'creating' | 'available';
+  tables: string[];
   topics: {table_name: string; topic_name: string}[];
 }
