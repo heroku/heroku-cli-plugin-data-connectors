@@ -1,6 +1,6 @@
 import {cli} from 'cli-ux'
 
-import BaseCommand, {PostgresConnector} from '../../lib/base'
+import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsDestroy extends BaseCommand {
   static description = 'destroy a Postgres Connector'

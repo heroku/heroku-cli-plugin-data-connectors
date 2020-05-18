@@ -2,7 +2,7 @@ import color from '@heroku-cli/color'
 import {flags} from '@heroku-cli/command'
 import {cli} from 'cli-ux'
 
-import BaseCommand, {PostgresConnector} from '../../lib/base'
+import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsCreate extends BaseCommand {
   static description = 'create a new Postgres Connector attached to your Kafka cluster'

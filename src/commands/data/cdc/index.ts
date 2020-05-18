@@ -2,7 +2,7 @@ import {flags} from '@heroku-cli/command'
 import color from '@heroku-cli/color'
 import cli from 'cli-ux'
 
-import BaseCommand, {PostgresConnector} from '../../lib/base'
+import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class CdcInfo extends BaseCommand {
   static description = 'get information about a CDC Connection'
