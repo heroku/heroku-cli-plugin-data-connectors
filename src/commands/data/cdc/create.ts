@@ -12,7 +12,7 @@ export default class ConnectorsCreate extends BaseCommand {
   ]
 
   static flags = {
-    'postgres-addon': flags.string({required: true}),
+    source: flags.string({required: true}),
     table: flags.string({
       char: 't',
       description: 'Tables to include',
@@ -27,14 +27,14 @@ export default class ConnectorsCreate extends BaseCommand {
   }
 
   static examples = [
-    '$ heroku data:cdc:create kafka-lovely-12345 --postgres-addon postgresql-neato-98765 --table public.posts --table public.comments',
-    '$ heroku data:cdc:create kafka-lovely-12345 --postgres-addon postgresql-neato-98765 --table public.users --exclude public.users.password',
+    '$ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts --table public.comments',
+    '$ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users --exclude public.users.password',
   ]
 
   async run() {
     const {args, flags} = this.parse(ConnectorsCreate)
     const kafka_tenant = args.kafka
-    const postgresAddon = flags['postgres-addon']
+    const postgresAddon = flags.source
     const tables = flags.table
     const excluded = flags.exclude || []
 
