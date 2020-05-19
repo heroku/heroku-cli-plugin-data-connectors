@@ -6,7 +6,9 @@ export default class ConnectorsDestroy extends BaseCommand {
   static description = 'destroy a Postgres Connector'
 
   static args = [
-    {name: 'connector'},
+    {
+      name: 'connector',
+    },
   ]
 
   static examples = [
@@ -18,7 +20,14 @@ export default class ConnectorsDestroy extends BaseCommand {
     const connector = args.connector
 
     cli.action.start('Destroying Postgres Connector')
-    await this.shogun.delete<PostgresConnector>(`/data/cdc/v0/connectors/${connector}`, this.shogun.defaults)
-    cli.action.stop()
+    try {
+      await this.shogun.delete<PostgresConnector>(`/data/cdc/v0/connectors/${connector}`, this.shogun.defaults)
+      this.log(`Postgres Connector ${connector} deleted successfully.`)
+    } catch (error) {
+      this.warn('There was an issue deleting your Postgres Connector.')
+      throw error
+    } finally {
+      cli.action.stop()
+    }
   }
 }
