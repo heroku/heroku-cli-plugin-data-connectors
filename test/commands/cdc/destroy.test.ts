@@ -2,7 +2,7 @@ import {expect, test} from '@oclif/test'
 
 const connectorId = '123456'
 
-describe('cdc:destroy', () => {
+describe('data:cdc:destroy', () => {
   test
   .nock('https://postgres-api.heroku.com', api => {
     api
@@ -11,7 +11,7 @@ describe('cdc:destroy', () => {
   })
   .stdout()
   .command([
-    'cdc:destroy',
+    'data:cdc:destroy',
     connectorId,
   ])
   .it('works', ctx => {
@@ -28,7 +28,7 @@ describe('cdc:destroy', () => {
   .stdout()
   .stderr()
   .command([
-    'cdc:destroy',
+    'data:cdc:destroy',
     connectorId,
   ])
   .catch(error => {
