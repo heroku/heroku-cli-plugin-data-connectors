@@ -1,6 +1,6 @@
 import {cli} from 'cli-ux'
 
-import BaseCommand, {PostgresConnector} from '../../lib/base'
+import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsWait extends BaseCommand {
   static description = 'wait for your Postgres Connector to be provisioned'
