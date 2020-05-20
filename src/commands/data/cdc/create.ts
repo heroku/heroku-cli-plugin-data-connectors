@@ -7,12 +7,15 @@ import BaseCommand, {PostgresConnector} from '../../../lib/base'
 export default class ConnectorsCreate extends BaseCommand {
   static description = 'create a new Postgres Connector attached to your Kafka cluster'
 
-  static args = [
-    {name: 'kafka'},
-  ]
-
   static flags = {
-    source: flags.string({required: true}),
+    source: flags.string({
+      required: true,
+      description: 'The name or ID of the Postgres instance whose change data you want to store',
+    }),
+    store: flags.string({
+      required: true,
+      description: 'The name or ID of the Kafka instance that will store the change data',
+    }),
     table: flags.string({
       char: 't',
       description: 'Tables to include',
@@ -32,17 +35,16 @@ export default class ConnectorsCreate extends BaseCommand {
   ]
 
   async run() {
-    const {args, flags} = this.parse(ConnectorsCreate)
-    const kafka_tenant = args.kafka
-    const postgresAddon = flags.source
+    const {flags} = this.parse(ConnectorsCreate)
+    const {source: postgres, store: kafka} = flags
     const tables = flags.table
     const excluded = flags.exclude || []
 
     cli.action.start('Creating Postgres Connector')
-    const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka_tenant}`, {
+    const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka}`, {
       ...this.shogun.defaults,
       body: {
-        postgres_addon_uuid: postgresAddon,
+        postgres_addon_uuid: postgres,
         tables,
         excluded_columns: excluded,
       },
@@ -54,7 +56,7 @@ export default class ConnectorsCreate extends BaseCommand {
     })
 
     this.log()
-    this.log(`The Postgres Connector is now being provisioned for ${color.cyan(kafka_tenant)}.`)
+    this.log(`The Postgres Connector is now being provisioned for ${color.cyan(kafka)}.`)
     this.log('Run ' + color.cyan('heroku data:cdc:wait ' + res.name + ' --app ' + flags.app) +
              ' to check the creation process.')
   }

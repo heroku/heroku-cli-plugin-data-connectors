@@ -17,7 +17,6 @@ export default abstract class Base extends Command {
   }
 }
 export interface PostgresConnector {
-  uuid: string;
   created_at: string;
   excluded_columns: string[];
   kafka_addon: {name: string; uuid: string};
@@ -28,4 +27,5 @@ export interface PostgresConnector {
   status: 'creating' | 'available';
   tables: string[];
   topics: {table_name: string; topic_name: string}[];
+  uuid: string;
 }
