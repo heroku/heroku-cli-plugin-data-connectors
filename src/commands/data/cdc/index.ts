@@ -7,7 +7,7 @@ import BaseCommand, {PostgresConnector} from '../../../lib/base'
 export default class CdcInfo extends BaseCommand {
   static description = 'get information about a CDC Connection'
 
-  static aliases = ['cdc:info']
+  static aliases = ['data:cdc:info']
 
   static examples = [
     '$ heroku cdc ad2a0126-aee2-4815-8e95-8367e3a2984b',
