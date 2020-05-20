@@ -17,30 +17,30 @@ A Heroku CLI Plugin for managing Change Data Capture connections
 <!-- usage -->
 ```sh-session
 $ npm install -g heroku-change-data-capture
-$ oclif-example COMMAND
+$ heroku COMMAND
 running command...
-$ oclif-example (-v|--version|version)
+$ heroku (-v|--version|version)
 heroku-change-data-capture/0.0.0 darwin-x64 node-v12.15.0
-$ oclif-example --help [COMMAND]
+$ heroku --help [COMMAND]
 USAGE
-  $ oclif-example COMMAND
+  $ heroku COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`oclif-example data:cdc:create`](#oclif-example-datacdccreate)
-* [`oclif-example data:cdc:destroy [CONNECTOR]`](#oclif-example-datacdcdestroy-connector)
-* [`oclif-example data:cdc:info [CDCID]`](#oclif-example-datacdcinfo-cdcid)
-* [`oclif-example data:cdc:wait [CONNECTOR]`](#oclif-example-datacdcwait-connector)
+* [`heroku data:cdc:create`](#heroku-datacdccreate)
+* [`heroku data:cdc:destroy [CONNECTOR]`](#heroku-datacdcdestroy-connector)
+* [`heroku data:cdc:info [CDCID]`](#heroku-datacdcinfo-cdcid)
+* [`heroku data:cdc:wait [CONNECTOR]`](#heroku-datacdcwait-connector)
 
-## `oclif-example data:cdc:create`
+## `heroku data:cdc:create`
 
 create a new Postgres Connector attached to your Kafka cluster
 
 ```
 USAGE
-  $ oclif-example data:cdc:create
+  $ heroku data:cdc:create
 
 OPTIONS
   -a, --app=app      app to run command against
@@ -58,13 +58,13 @@ EXAMPLES
 
 _See code: [src/commands/data/cdc/create.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/create.ts)_
 
-## `oclif-example data:cdc:destroy [CONNECTOR]`
+## `heroku data:cdc:destroy [CONNECTOR]`
 
 destroy a Postgres Connector
 
 ```
 USAGE
-  $ oclif-example data:cdc:destroy [CONNECTOR]
+  $ heroku data:cdc:destroy [CONNECTOR]
 
 EXAMPLE
   $ heroku data:cdc:destroy gentle-connector-1234
@@ -72,13 +72,13 @@ EXAMPLE
 
 _See code: [src/commands/data/cdc/destroy.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/destroy.ts)_
 
-## `oclif-example data:cdc:info [CDCID]`
+## `heroku data:cdc:info [CDCID]`
 
 get information about a CDC Connection
 
 ```
 USAGE
-  $ oclif-example data:cdc:info [CDCID]
+  $ heroku data:cdc:info [CDCID]
 
 OPTIONS
   --json  output in json format
@@ -90,13 +90,13 @@ EXAMPLES
 
 _See code: [src/commands/data/cdc/info.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/info.ts)_
 
-## `oclif-example data:cdc:wait [CONNECTOR]`
+## `heroku data:cdc:wait [CONNECTOR]`
 
 wait for your Postgres Connector to be provisioned
 
 ```
 USAGE
-  $ oclif-example data:cdc:wait [CONNECTOR]
+  $ heroku data:cdc:wait [CONNECTOR]
 
 EXAMPLE
   $ heroku data:cdc:wait gentle-connector-1234
