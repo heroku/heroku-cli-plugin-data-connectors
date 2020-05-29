@@ -39,19 +39,24 @@ export default class ConnectorsCreate extends BaseCommand {
     '$ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users --exclude public.users.password',
   ]
 
+  interface PostBody {
+    postgres_addon_uuid: string;
+    tables: Array<string>;
+    excluded_columns: Array<string>;
+    image_tag: string;
+  }
+
   async run() {
     const {flags} = this.parse(ConnectorsCreate)
     const {source: postgres, store: kafka} = flags
     const tables = flags.table
     const excluded = flags.exclude || []
-    const imageTag = flags['image-tag'] || undefined
-    let postBody = {
+    const imageTag = flags['image-tag'] || ""
+    let postBody: PostBody = {
       postgres_addon_uuid: postgres,
       tables,
       excluded_columns: excluded,
-    }
-    if (imageTag) {
-      postBody.image_tag = imageTag
+      image_tag: imageTag,
     }
 
     cli.action.start('Creating Postgres Connector')
