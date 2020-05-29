@@ -12,6 +12,7 @@ const kafkaTenant = {
   excluded_columns: [
     'public.foo.column1',
   ],
+  image_tag: "",
 }
 
 describe('data:cdc:create', () => {
