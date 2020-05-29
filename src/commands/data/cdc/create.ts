@@ -51,7 +51,7 @@ export default class ConnectorsCreate extends BaseCommand {
       excluded_columns: excluded,
     }
     if (image_tag) {
-      body.image_tag = imageTag
+      body.image_tag = image_tag
     }
 
     cli.action.start('Creating Postgres Connector')
