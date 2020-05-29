@@ -27,6 +27,11 @@ export default class ConnectorsCreate extends BaseCommand {
       description: 'Columns to exclude',
       multiple: true,
     }),
+    'image-tag': flags.string({
+      char: 'i',
+      required: false,
+      hidden: true,
+    }),
   }
 
   static examples = [
@@ -39,15 +44,20 @@ export default class ConnectorsCreate extends BaseCommand {
     const {source: postgres, store: kafka} = flags
     const tables = flags.table
     const excluded = flags.exclude || []
+    const image_tag = flags['image-tag'] || null
+    let body = {
+      postgres_addon_uuid: postgres,
+      tables,
+      excluded_columns: excluded,
+    }
+    if (image_tag) {
+      body.image_tag = imageTag
+    }
 
     cli.action.start('Creating Postgres Connector')
     const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka}`, {
       ...this.shogun.defaults,
-      body: {
-        postgres_addon_uuid: postgres,
-        tables,
-        excluded_columns: excluded,
-      },
+      body: body,
     })
     cli.action.stop()
     this.log()
