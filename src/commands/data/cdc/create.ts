@@ -44,7 +44,7 @@ export default class ConnectorsCreate extends BaseCommand {
     const {source: postgres, store: kafka} = flags
     const tables = flags.table
     const excluded = flags.exclude || []
-    const imageTag = flags['image-tag'] || ""
+    const imageTag = flags['image-tag'] || ''
 
     cli.action.start('Creating Postgres Connector')
     const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka}`, {
