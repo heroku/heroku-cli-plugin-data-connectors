@@ -50,7 +50,7 @@ export default class ConnectorsCreate extends BaseCommand {
       tables,
       excluded_columns: excluded,
     }
-    if (image_tag) {
+    if (imageTag) {
       postBody.image_tag = imageTag
     }
 
