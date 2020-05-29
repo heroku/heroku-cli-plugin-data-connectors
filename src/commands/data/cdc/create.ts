@@ -30,7 +30,6 @@ export default class ConnectorsCreate extends BaseCommand {
     'image-tag': flags.string({
       char: 'i',
       required: false,
-      hidden: true,
     }),
   }
 
