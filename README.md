@@ -29,10 +29,36 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`heroku data:cdc`](#heroku-datacdc)
 * [`heroku data:cdc:create`](#heroku-datacdccreate)
 * [`heroku data:cdc:destroy [CONNECTOR]`](#heroku-datacdcdestroy-connector)
 * [`heroku data:cdc:info [CDCID]`](#heroku-datacdcinfo-cdcid)
 * [`heroku data:cdc:wait [CONNECTOR]`](#heroku-datacdcwait-connector)
+
+## `heroku data:cdc`
+
+List all Postgres connectors for a particular app or addon
+
+```
+USAGE
+  $ heroku data:cdc
+
+OPTIONS
+  -a, --app=app  app to run command against
+  --addon=addon  The ID or name for the addon your your connector is attached to
+  --json         Return the results as json
+  --table        Return the results as a table
+
+ALIASES
+  $ heroku data:cdc:list
+
+EXAMPLES
+  heroku data:cdc -a your-app
+  heroku data:cdc --app=your-app --json
+  heroku data:cdc --addon=your-postgres-addon --table
+```
+
+_See code: [src/commands/data/cdc/index.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/index.ts)_
 
 ## `heroku data:cdc:create`
 

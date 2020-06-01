@@ -16,6 +16,10 @@ type ConnectorInfo = Pick<
 export default class ConnectorsList extends BaseCommand {
   static description = 'List all Postgres connectors for a particular app or addon'
 
+  static aliases = [
+    'data:cdc:list',
+  ]
+
   static examples = [
     'heroku data:cdc -a your-app',
     'heroku data:cdc --app=your-app --json',
