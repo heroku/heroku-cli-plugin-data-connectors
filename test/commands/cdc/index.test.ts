@@ -1,104 +1,114 @@
 import {expect, test} from '@oclif/test'
 
-const connector = {
-  kafka_app: {
-    name: 'my-sweet-app',
-  },
-  kafka_addon: {
-    name: 'kafka-metric-96658',
-    uuid: '8ca74bdf-25ea-413b-bbc1-90c57233361f',
-  },
-  postgres_app: {
-    name: 'my-sweet-app',
-  },
-  postgres_addon: {
-    name: 'postgresql-rectangular-10992',
-    uuid: '677abc7a-839a-4589-86c3-e0a28a882690',
-  },
-  uuid: '123456',
-  name: 'pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a',
-  status: 'available',
-  created_at: '2020-05-05 15:37:21 +0000',
-  tables: [
-    'public.posts',
-    'public.comments',
-  ],
-  excluded_columns: [
-    'foo',
-    'bar',
-  ],
-  topics: [
-    {
-      table_name: 'public.posts',
-      topic_name: 'pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a.public.posts',
-    },
-    {
-      table_name: 'public.comments',
-      topic_name: 'pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a.public.comments',
-    },
-  ],
-}
+const appName = 'my-sweet-app'
+const appId = '123456'
 
-describe('data:cdc:info', () => {
-  describe('when the connector is still provisioning', () => {
+const kafkaName = 'kafka-metric-96658'
+const kafkaId = '8ca74bdf-25ea-413b-bbc1-90c57233361f'
+
+const connectorList = [
+  {
+    kafka_app: {
+      name: appName,
+    },
+    kafka_addon: {
+      name: kafkaName,
+      uuid: kafkaId,
+    },
+    postgres_app: {
+      name: appName,
+    },
+    postgres_addon: {
+      name: 'postgresql-rectangular-10992',
+      uuid: '677abc7a-839a-4589-86c3-e0a28a882690',
+    },
+    uuid: '123456',
+    name: 'pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a',
+  },
+  {
+    kafka_app: {
+      name: appName,
+    },
+    kafka_addon: {
+      name: kafkaName,
+      uuid: kafkaId,
+    },
+    postgres_app: {
+      name: appName,
+    },
+    postgres_addon: {
+      name: 'postgresql-rectangular-10992',
+      uuid: '677abc7a-839a-4589-86c3-e0a28a882690',
+    },
+    uuid: '123456',
+    name: 'pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a',
+  },
+]
+
+describe('data:cdc', () => {
+  describe('using the app flag', () => {
     test
+    .nock('https://api.heroku.com', api => {
+      api
+      .get(`/apps/${appName}`)
+      .reply(200, {
+        id: appId,
+      })
+    })
     .nock('https://postgres-api.heroku.com', api => {
       api
-      .get(`/data/cdc/v0/connectors/${connector.uuid}`)
-      .reply(200, {...connector, status: 'creating'})
+      .get(`/data/cdc/v0/apps/${appId}`)
+      .reply(200, connectorList)
     })
     .stdout()
-    .command(['data:cdc:info', '123456'])
-    .it('indicates the connector is still being provisioned', ctx => {
-      const expectedOutput = `The Postgres Connector is now being provisioned for 123456.
-Run heroku data:cdc:wait -a APP to check the creation process.`
-
-      expect(ctx.stdout).to.include(expectedOutput)
-    })
-  })
-
-  describe('with normal output', () => {
-    test
-    .nock('https://postgres-api.heroku.com', api => {
-      api
-      .get(`/data/cdc/v0/connectors/${connector.uuid}`)
-      .reply(200, connector)
-    })
-    .stdout()
-    .command(['data:cdc:info', '123456'])
+    .command(['data:cdc', `--app=${appName}`])
     .it('returns the correct output', ctx => {
-      const expectedOutput = `=== Postgres Connector status for 123456
-Service Name: 123456
-Status:       available
+      const expectedOutput = `=== Postgres Connector info for ${appName}
+Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
+Kafka Add-On:    kafka-metric-96658
+Postgres Add-On: postgresql-rectangular-10992
 
-=== Configuration
-Table Name      Topic Name
-public.posts    pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a.public.posts
-public.comments pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a.public.comments
+Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
+Kafka Add-On:    kafka-metric-96658
+Postgres Add-On: postgresql-rectangular-10992`
 
-Excluded Columns
-foo
-bar
-
-Your postgres connector is now available.`
-
-      ctx.stdout.split('\n').forEach(line => {
-        expect(expectedOutput).to.include(line.trim())
+      ctx.stdout.split('\n').forEach(v => {
+        expect(expectedOutput).to.include(v.trim())
       })
     })
   })
 
-  describe('with --json flag', () => {
+  describe('using the addon flag', () => {
     test
+    .nock('https://api.heroku.com', api => {
+      api
+      .post('/actions/addons/resolve', {
+        addon: kafkaName,
+      })
+      .reply(200, [{
+        id: kafkaId,
+      }])
+    })
     .nock('https://postgres-api.heroku.com', api => {
       api
-      .get(`/data/cdc/v0/connectors/${connector.uuid}`)
-      .reply(200, connector)
+      .get(`/data/cdc/v0/addons/${kafkaId}`)
+      .reply(200, connectorList)
     })
     .stdout()
-    .command(['data:cdc:info', '123456', '--json'])
-    .it('returns the correct JSON output', ctx => {
-      expect(JSON.parse(ctx.stdout)).to.deep.equal(connector)
+    .command(['data:cdc', `--addon=${kafkaName}`])
+    .it('returns the correct output', ctx => {
+      const expectedOutput = `=== Postgres Connector info for ${kafkaName}
+Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
+Kafka Add-On:    kafka-metric-96658
+Postgres Add-On: postgresql-rectangular-10992
+
+Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
+Kafka Add-On:    kafka-metric-96658
+Postgres Add-On: postgresql-rectangular-10992`
+
+      ctx.stdout.split('\n').forEach(v => {
+        expect(expectedOutput).to.include(v.trim())
+      })
     })
   })
 })
