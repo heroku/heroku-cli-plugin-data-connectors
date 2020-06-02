@@ -28,6 +28,7 @@ export default class ConnectorsList extends BaseCommand {
 
   static flags = {
     app: flags.app(),
+    remote: flags.remote(),
     addon: flags.string({
       description: 'The ID or name for the addon your your connector is attached to',
     }),
