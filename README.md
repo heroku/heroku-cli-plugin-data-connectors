@@ -69,11 +69,10 @@ USAGE
   $ heroku data:cdc:create
 
 OPTIONS
-  -a, --app=app      app to run command against
-  -t, --table=table  (required) Tables to include
-  --exclude=exclude  Columns to exclude
   --source=source    (required) The name or ID of the Postgres instance whose change data you want to store
   --store=store      (required) The name or ID of the Kafka instance that will store the change data
+  -t, --table=table  (required) Tables to include
+  --exclude=exclude  Columns to exclude
 
 EXAMPLES
   $ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts --table 
