@@ -33,6 +33,8 @@ USAGE
 * [`heroku data:cdc:create`](#heroku-datacdccreate)
 * [`heroku data:cdc:destroy [CONNECTOR]`](#heroku-datacdcdestroy-connector)
 * [`heroku data:cdc:info [CDCID]`](#heroku-datacdcinfo-cdcid)
+* [`heroku data:cdc:pause [CONNECTOR]`](#heroku-datacdcpause-connector)
+* [`heroku data:cdc:resume [CONNECTOR]`](#heroku-datacdcresume-connector)
 * [`heroku data:cdc:wait [CONNECTOR]`](#heroku-datacdcwait-connector)
 
 ## `heroku data:cdc`
@@ -44,10 +46,11 @@ USAGE
   $ heroku data:cdc
 
 OPTIONS
-  -a, --app=app  app to run command against
-  --addon=addon  The ID or name for the addon your your connector is attached to
-  --json         Return the results as json
-  --table        Return the results as a table
+  -a, --app=app        app to run command against
+  -r, --remote=remote  git remote of app to use
+  --addon=addon        The ID or name for the addon your your connector is attached to
+  --json               Return the results as json
+  --table              Return the results as a table
 
 ALIASES
   $ heroku data:cdc:list
@@ -115,6 +118,34 @@ EXAMPLES
 ```
 
 _See code: [src/commands/data/cdc/info.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/info.ts)_
+
+## `heroku data:cdc:pause [CONNECTOR]`
+
+Pause change event creation on a Postgres connector
+
+```
+USAGE
+  $ heroku data:cdc:pause [CONNECTOR]
+
+EXAMPLE
+  heroku data:cdc:pause my-sweet-connector
+```
+
+_See code: [src/commands/data/cdc/pause.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/pause.ts)_
+
+## `heroku data:cdc:resume [CONNECTOR]`
+
+Resume change event creation on a Postgres connector
+
+```
+USAGE
+  $ heroku data:cdc:resume [CONNECTOR]
+
+EXAMPLE
+  heroku data:cdc:resume my-sweet-connector
+```
+
+_See code: [src/commands/data/cdc/resume.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/resume.ts)_
 
 ## `heroku data:cdc:wait [CONNECTOR]`
 
