@@ -2,7 +2,7 @@ import {cli} from 'cli-ux'
 import BaseCommand from '../../../lib/base'
 
 export default class ConnectorPause extends BaseCommand {
-  static description = 'Reme change event creation on a Postgres connector'
+  static description = 'Pause change event creation on a Postgres connector'
 
   static examples = [
     'heroku data:cdc:pause my-sweet-connector',

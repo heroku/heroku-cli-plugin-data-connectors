@@ -11,9 +11,9 @@ describe('data:cdc:resume', () => {
       .reply(200, '')
     })
     .stderr()
-    .command(['data:cdc:pause', connectorId])
+    .command(['data:cdc:resume', connectorId])
     .it('works', ctx => {
-      expect(ctx.stderr).to.include(`Pausing Postgres connector ${connectorId}... done`)
+      expect(ctx.stderr).to.include(`Resuming Postgres connector ${connectorId}... done`)
     })
   })
 })
