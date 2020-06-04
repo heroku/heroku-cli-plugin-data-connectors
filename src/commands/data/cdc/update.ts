@@ -24,7 +24,7 @@ export default class CdcUpdate extends BaseCommand {
   static flags = {
     setting: flags.string({
       multiple: true,
-      required: false,
+      required: true,
       parse: input => {
         const [key, value] = input.split('=')
         if (!key || !value) {
