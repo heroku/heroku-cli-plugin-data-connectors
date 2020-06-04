@@ -31,7 +31,6 @@ export default class ConnectorsCreate extends BaseCommand {
       required: false,
       hidden: true,
     }),
-    app: flags.app(),
   }
 
   static examples = [
@@ -64,7 +63,7 @@ export default class ConnectorsCreate extends BaseCommand {
 
     this.log()
     this.log(`The Postgres Connector is now being provisioned for ${color.cyan(kafka)}.`)
-    this.log('Run ' + color.cyan('heroku data:cdc:wait ' + res.name + ' --app ' + flags.app) +
+    this.log('Run ' + color.cyan('heroku data:cdc:wait ' + res.name) +
              ' to check the creation process.')
   }
 }
