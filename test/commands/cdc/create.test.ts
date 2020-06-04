@@ -16,7 +16,7 @@ const kafkaTenant = {
 }
 
 describe('data:cdc:create', () => {
-  const expectedOutput = 'The Postgres Connector is now being provisioned for abcdef.\nRun heroku data:cdc:wait new-cdc-connector --app undefined to check the creation process.'
+  const expectedOutput = 'The Postgres Connector is now being provisioned for abcdef.\nRun heroku data:cdc:wait new-cdc-connector to check the creation process.'
   test
   .nock('https://postgres-api.heroku.com', api => {
     api
