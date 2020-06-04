@@ -50,7 +50,7 @@ export default class CdcInfo extends BaseCommand {
       'Service Name': res.uuid || 'Provisioning',
     })
 
-    if (res.topics.length > 0) {
+    if (res.topics && res.topics.length > 0) {
       this.log()
       cli.styledHeader('Configuration')
       cli.table(res.topics, {
@@ -59,7 +59,7 @@ export default class CdcInfo extends BaseCommand {
       })
     }
 
-    if (res.excluded_columns.length > 0) {
+    if (res.excluded_columns && res.excluded_columns.length > 0) {
       this.log()
       this.log(color.bold('Excluded Columns'))
 
