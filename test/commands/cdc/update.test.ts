@@ -7,7 +7,7 @@ const settings = {
   'decimal.handling.mode': 'precise',
 }
 
-describe.only('data:cdc:update', () => {
+describe('data:cdc:update', () => {
   describe('standard use', () => {
     const expectedOutput = `The Postgres Connector is now being updated.\nRun heroku data:cdc:wait ${connectorId} to check the update process.`
     test
