@@ -27,7 +27,7 @@ export default class CdcInfo extends BaseCommand {
   async run() {
     const {args, flags} = this.parse(CdcInfo)
 
-    const connector = args.cdcId
+    const connector = args.connector
     const {body: res} = await this.shogun.get<PostgresConnector>(
       `/data/cdc/v0/connectors/${connector}`,
       this.shogun.defaults
