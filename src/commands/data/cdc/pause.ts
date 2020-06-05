@@ -5,7 +5,7 @@ export default class ConnectorPause extends BaseCommand {
   static description = 'Pause change event creation on a Postgres connector'
 
   static examples = [
-    'heroku data:cdc:pause my-sweet-connector',
+    '$ heroku data:cdc:pause gentle-connector-1234',
   ]
 
   static args = [
