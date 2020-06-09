@@ -5,7 +5,7 @@ export default class ConnectorResume extends BaseCommand {
   static description = 'Resume change event creation on a Postgres connector'
 
   static examples = [
-    'heroku data:cdc:resume my-sweet-connector',
+    '$ heroku data:cdc:resume gentle-connector-1234',
   ]
 
   static args = [
