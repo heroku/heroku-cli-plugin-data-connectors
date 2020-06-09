@@ -14,16 +14,16 @@ type ConnectorInfo = Pick<
 >
 
 export default class ConnectorsList extends BaseCommand {
-  static description = 'List all Postgres connectors for a particular app or addon'
+  static description = 'List all Data Connectors for a particular app or addon'
 
   static aliases = [
-    'data:cdc:list',
+    'data:connectors:list',
   ]
 
   static examples = [
-    'heroku data:cdc -a your-app',
-    'heroku data:cdc --app=your-app --json',
-    'heroku data:cdc --addon=your-postgres-addon --table',
+    'heroku data:connectors -a your-app',
+    'heroku data:connectors --app=your-app --json',
+    'heroku data:connectors --addon=your-postgres-addon --table',
   ]
 
   static flags = {
@@ -75,7 +75,7 @@ export default class ConnectorsList extends BaseCommand {
       cli.error('You must pass either the --app or --addon flag')
     }
 
-    cli.styledHeader(`Postgres Connector info for ${flags.app || flags.addon}`)
+    cli.styledHeader(`Data Connector info for ${flags.app || flags.addon}`)
 
     if (flags.table) {
       cli.table(connectorInfo, {

@@ -3,14 +3,14 @@ import {cli} from 'cli-ux'
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsWait extends BaseCommand {
-  static description = 'wait for your Postgres Connector to be provisioned'
+  static description = 'wait for your Data Connector to be provisioned'
 
   static args = [
     {name: 'connector'},
   ]
 
   static examples = [
-    '$ heroku data:cdc:wait gentle-connector-1234',
+    '$ heroku data:connectors:wait gentle-connector-1234',
   ]
 
   async run() {
@@ -19,7 +19,7 @@ export default class ConnectorsWait extends BaseCommand {
 
     let status
 
-    cli.action.start('Waiting for the Postgres Connector to be provisioned')
+    cli.action.start('Waiting for the Data Connector to be provisioned')
 
     /* eslint-disable no-await-in-loop */
     while (status !== 'available') {

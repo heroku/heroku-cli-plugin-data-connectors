@@ -5,16 +5,16 @@ import {cli} from 'cli-ux'
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsCreate extends BaseCommand {
-  static description = 'create a new Postgres Connector attached to your Kafka cluster'
+  static description = 'create a new Data Connector'
 
   static flags = {
     source: flags.string({
       required: true,
-      description: 'The name or ID of the Postgres instance whose change data you want to store',
+      description: 'The name or ID of the database instance whose change data you want to store',
     }),
     store: flags.string({
       required: true,
-      description: 'The name or ID of the Kafka instance that will store the change data',
+      description: 'The name or ID of the database instance that will store the change data',
     }),
     table: flags.string({
       char: 't',
@@ -34,8 +34,8 @@ export default class ConnectorsCreate extends BaseCommand {
   }
 
   static examples = [
-    '$ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts --table public.comments',
-    '$ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users --exclude public.users.password',
+    '$ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts --table public.comments',
+    '$ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users --exclude public.users.password',
   ]
 
   async run() {
@@ -45,7 +45,7 @@ export default class ConnectorsCreate extends BaseCommand {
     const excluded = flags.exclude || []
     const imageTag = flags['image-tag'] || ''
 
-    cli.action.start('Creating Postgres Connector')
+    cli.action.start('Creating Data Connector')
     const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka}`, {
       ...this.shogun.defaults,
       body: {
@@ -62,8 +62,8 @@ export default class ConnectorsCreate extends BaseCommand {
     })
 
     this.log()
-    this.log(`The Postgres Connector is now being provisioned for ${color.cyan(kafka)}.`)
-    this.log('Run ' + color.cyan('heroku data:cdc:wait ' + res.name) +
+    this.log(`The Data Connector is now being provisioned for ${color.cyan(kafka)}.`)
+    this.log('Run ' + color.cyan('heroku data:connectors:wait ' + res.name) +
              ' to check the creation process.')
   }
 }

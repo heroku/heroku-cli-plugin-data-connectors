@@ -1,11 +1,11 @@
 import {cli} from 'cli-ux'
 import BaseCommand from '../../../lib/base'
 
-export default class ConnectorPause extends BaseCommand {
-  static description = 'Pause change event creation on a Postgres connector'
+export default class ConnectorsPause extends BaseCommand {
+  static description = 'Pause change event creation on a Data Connector'
 
   static examples = [
-    '$ heroku data:cdc:pause gentle-connector-1234',
+    '$ heroku data:connectors:pause gentle-connector-1234',
   ]
 
   static args = [
@@ -15,9 +15,9 @@ export default class ConnectorPause extends BaseCommand {
   ]
 
   async run() {
-    const {args} = this.parse(ConnectorPause)
+    const {args} = this.parse(ConnectorsPause)
 
-    cli.action.start(`Pausing Postgres connector ${args.connector}`)
+    cli.action.start(`Pausing Data Connector ${args.connector}`)
     try {
       await this.shogun.put(`/data/cdc/v0/connectors/${args.connector}/pause`,
         {
