@@ -1,5 +1,5 @@
 {
-  "name": "data-connectors-plugin",
+  "name": "@heroku-cli/data-connectors-plugin",
   "description": "A Heroku CLI Plugin for managing Heroku Data Connectors",
   "version": "0.0.0",
   "author": "Chris Freeman @cafreeman",
