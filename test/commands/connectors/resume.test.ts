@@ -2,7 +2,7 @@ import {expect, test} from '@oclif/test'
 
 const connectorId = '123456'
 
-describe('data:cdc:resume', () => {
+describe('data:connectors:resume', () => {
   describe('pausing the connection', () => {
     test
     .nock('https://postgres-api.heroku.com', api => {
@@ -11,9 +11,9 @@ describe('data:cdc:resume', () => {
       .reply(200, '')
     })
     .stderr()
-    .command(['data:cdc:resume', connectorId])
+    .command(['data:connectors:resume', connectorId])
     .it('works', ctx => {
-      expect(ctx.stderr).to.include(`Resuming Postgres connector ${connectorId}... done`)
+      expect(ctx.stderr).to.include(`Resuming Data Connector ${connectorId}... done`)
     })
   })
 })

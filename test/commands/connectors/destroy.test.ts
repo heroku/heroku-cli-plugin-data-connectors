@@ -2,7 +2,7 @@ import {expect, test} from '@oclif/test'
 
 const connectorId = '123456'
 
-describe('data:cdc:destroy', () => {
+describe('data:connectors:destroy', () => {
   test
   .nock('https://postgres-api.heroku.com', api => {
     api
@@ -11,11 +11,11 @@ describe('data:cdc:destroy', () => {
   })
   .stdout()
   .command([
-    'data:cdc:destroy',
+    'data:connectors:destroy',
     connectorId,
   ])
   .it('works', ctx => {
-    const expectedOutput = `Postgres Connector ${connectorId} deleted successfully.`
+    const expectedOutput = `Data Connector ${connectorId} deleted successfully.`
     expect(ctx.stdout.trim()).to.include(expectedOutput)
   })
 
@@ -28,14 +28,14 @@ describe('data:cdc:destroy', () => {
   .stdout()
   .stderr()
   .command([
-    'data:cdc:destroy',
+    'data:connectors:destroy',
     connectorId,
   ])
   .catch(error => {
     expect(error.message).to.equal('negative ghost rider, the pattern is full')
   })
   .it('shows an error message when there is an error', ctx => {
-    const expectedOutput = 'There was an issue deleting your Postgres Connector.'
+    const expectedOutput = 'There was an issue deleting your Data Connector.'
     expect(ctx.stderr.trim()).to.include(expectedOutput)
   })
 })

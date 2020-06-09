@@ -7,9 +7,9 @@ const settings = {
   'decimal.handling.mode': 'precise',
 }
 
-describe('data:cdc:update', () => {
+describe('data:connectors:update', () => {
   describe('standard use', () => {
-    const expectedOutput = `The Postgres Connector is now being updated.\nRun heroku data:cdc:wait ${connectorId} to check the update process.`
+    const expectedOutput = `Your Data Connector is now being updated.\nRun heroku data:connectors:wait ${connectorId} to check the update process.`
     test
     .nock('https://postgres-api.heroku.com', api => {
       api
@@ -20,7 +20,7 @@ describe('data:cdc:update', () => {
     })
     .stdout()
     .command([
-      'data:cdc:update',
+      'data:connectors:update',
       connectorId,
       '--setting=foo=bar',
       '--setting=decimal.handling.mode=precise',
@@ -41,7 +41,7 @@ describe('data:cdc:update', () => {
       .reply(200)
     })
     .command([
-      'data:cdc:update',
+      'data:connectors:update',
       connectorId,
       '--setting=foo.bar',
     ])
