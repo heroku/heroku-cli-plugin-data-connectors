@@ -35,6 +35,7 @@ USAGE
 * [`heroku data:cdc:info [CDCID]`](#heroku-datacdcinfo-cdcid)
 * [`heroku data:cdc:pause [CONNECTOR]`](#heroku-datacdcpause-connector)
 * [`heroku data:cdc:resume [CONNECTOR]`](#heroku-datacdcresume-connector)
+* [`heroku data:cdc:update [CONNECTOR]`](#heroku-datacdcupdate-connector)
 * [`heroku data:cdc:wait [CONNECTOR]`](#heroku-datacdcwait-connector)
 
 ## `heroku data:cdc`
@@ -72,10 +73,10 @@ USAGE
   $ heroku data:cdc:create
 
 OPTIONS
-  --source=source    (required) The name or ID of the Postgres instance whose change data you want to store
-  --store=store      (required) The name or ID of the Kafka instance that will store the change data
   -t, --table=table  (required) Tables to include
   --exclude=exclude  Columns to exclude
+  --source=source    (required) The name or ID of the Postgres instance whose change data you want to store
+  --store=store      (required) The name or ID of the Kafka instance that will store the change data
 
 EXAMPLES
   $ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts --table 
@@ -145,6 +146,23 @@ EXAMPLE
 ```
 
 _See code: [src/commands/data/cdc/resume.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/resume.ts)_
+
+## `heroku data:cdc:update [CONNECTOR]`
+
+update the settings for a Postgres connector
+
+```
+USAGE
+  $ heroku data:cdc:update [CONNECTOR]
+
+OPTIONS
+  --setting=setting
+
+EXAMPLE
+  $ heroku data:cdc:update ad2a0126-aee2-4815-8e95-8367e3a2984b --setting key=value --setting otherKey=otherValue
+```
+
+_See code: [src/commands/data/cdc/update.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/update.ts)_
 
 ## `heroku data:cdc:wait [CONNECTOR]`
 
