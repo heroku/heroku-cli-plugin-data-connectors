@@ -40,7 +40,7 @@ export default class ConnectorsInfo extends BaseCommand {
 
     if (res.status === 'creating') {
       this.log(`The Data Connector is now being provisioned for ${color.cyan(connector)}.`)
-      this.log(`Run ${color.cyan(`heroku data:connectors:wait ${res.uuid}`)} to check the creation process.`)
+      this.log(`Run ${color.cyan(`heroku data:connectors:wait ${res.name}`)} to check the creation process.`)
       return
     }
 

@@ -12,7 +12,7 @@ export default class ConnectorsUpdate extends BaseCommand {
   static description = 'update the settings for a Data Connector'
 
   static examples = [
-    '$ heroku data:connectors:update ad2a0126-aee2-4815-8e95-8367e3a2984b --setting key=value --setting otherKey=otherValue',
+    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue',
   ]
 
   static args = [
