@@ -2,7 +2,7 @@
   "name": "@heroku-cli/data-connectors-plugin",
   "description": "A Heroku CLI Plugin for managing Heroku Data Connectors",
   "version": "0.0.0",
-  "author": "Chris Freeman @cafreeman",
+  "author": "@heroku heroku-front-end@salesforce.com",
   "bugs": "https://github.com/heroku/data-connectors-plugin/issues",
   "dependencies": {
     "@heroku-cli/color": "^1.1.14",
