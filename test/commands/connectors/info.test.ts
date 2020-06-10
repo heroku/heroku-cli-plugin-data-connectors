@@ -51,7 +51,7 @@ describe('data:connectors:info', () => {
     .command(['data:connectors:info', '123456'])
     .it('indicates the connector is still being provisioned', ctx => {
       const expectedOutput = `The Data Connector is now being provisioned for 123456.
-Run heroku data:connectors:wait 123456 to check the creation process.`
+Run heroku data:connectors:wait ${connector.name} to check the creation process.`
 
       expect(ctx.stdout).to.include(expectedOutput)
     })
