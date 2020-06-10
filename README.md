@@ -1,13 +1,13 @@
-heroku-change-data-capture
+data-connectors-plugin
 ==========================
 
-A Heroku CLI Plugin for managing Change Data Capture connections
+A Heroku CLI Plugin for managing Heroku Data Connections
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/heroku-change-data-capture.svg)](https://npmjs.org/package/heroku-change-data-capture)
-[![CircleCI](https://circleci.com/gh/heroku/heroku-change-data-capture/tree/master.svg?style=shield)](https://circleci.com/gh/heroku/heroku-change-data-capture/tree/master)
-[![Downloads/week](https://img.shields.io/npm/dw/heroku-change-data-capture.svg)](https://npmjs.org/package/heroku-change-data-capture)
-[![License](https://img.shields.io/npm/l/heroku-change-data-capture.svg)](https://github.com/heroku/heroku-change-data-capture/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/data-connectors-plugin.svg)](https://npmjs.org/package/data-connectors-plugin)
+[![CircleCI](https://circleci.com/gh/heroku/data-connectors-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/heroku/data-connectors-plugin/tree/master)
+[![Downloads/week](https://img.shields.io/npm/dw/data-connectors-plugin.svg)](https://npmjs.org/package/data-connectors-plugin)
+[![License](https://img.shields.io/npm/l/data-connectors-plugin.svg)](https://github.com/heroku/data-connectors-plugin/blob/master/package.json)
 
 <!-- toc -->
 * [Usage](#usage)
