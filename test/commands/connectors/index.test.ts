@@ -45,7 +45,7 @@ const connectorList = [
   },
 ]
 
-describe('data:cdc', () => {
+describe('data:connectors', () => {
   describe('using the app flag', () => {
     test
     .nock('https://api.heroku.com', api => {
@@ -61,9 +61,9 @@ describe('data:cdc', () => {
       .reply(200, connectorList)
     })
     .stdout()
-    .command(['data:cdc', `--app=${appName}`])
+    .command(['data:connectors', `--app=${appName}`])
     .it('returns the correct output', ctx => {
-      const expectedOutput = `=== Postgres Connector info for ${appName}
+      const expectedOutput = `=== Data Connector info for ${appName}
 Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
 Kafka Add-On:    kafka-metric-96658
 Postgres Add-On: postgresql-rectangular-10992
@@ -95,9 +95,9 @@ Postgres Add-On: postgresql-rectangular-10992`
       .reply(200, connectorList)
     })
     .stdout()
-    .command(['data:cdc', `--addon=${kafkaName}`])
+    .command(['data:connectors', `--addon=${kafkaName}`])
     .it('returns the correct output', ctx => {
-      const expectedOutput = `=== Postgres Connector info for ${kafkaName}
+      const expectedOutput = `=== Data Connector info for ${kafkaName}
 Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
 Kafka Add-On:    kafka-metric-96658
 Postgres Add-On: postgresql-rectangular-10992

@@ -4,12 +4,12 @@ import cli from 'cli-ux'
 
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
-export default class CdcInfo extends BaseCommand {
-  static description = 'get information about a CDC Connection'
+export default class ConnectorsInfo extends BaseCommand {
+  static description = 'get information about a Data Connector'
 
   static examples = [
-    '$ heroku data:cdc:info gentle-connector-1234',
-    '$ heroku data:cdc:info gentle-connector-1234 --json',
+    '$ heroku data:connectors:info gentle-connector-1234',
+    '$ heroku data:connectors:info gentle-connector-1234 --json',
   ]
 
   static flags = {
@@ -25,7 +25,7 @@ export default class CdcInfo extends BaseCommand {
   ]
 
   async run() {
-    const {args, flags} = this.parse(CdcInfo)
+    const {args, flags} = this.parse(ConnectorsInfo)
 
     const connector = args.connector
     const {body: res} = await this.shogun.get<PostgresConnector>(
@@ -39,12 +39,12 @@ export default class CdcInfo extends BaseCommand {
     }
 
     if (res.status === 'creating') {
-      this.log(`The Postgres Connector is now being provisioned for ${color.cyan(connector)}.`)
-      this.log(`Run ${color.cyan('heroku data:cdc:wait -a APP')} to check the creation process.`)
+      this.log(`The Data Connector is now being provisioned for ${color.cyan(connector)}.`)
+      this.log(`Run ${color.cyan(`heroku data:connectors:wait ${res.name}`)} to check the creation process.`)
       return
     }
 
-    cli.styledHeader(`Postgres Connector status for ${color.cyan(connector)}`)
+    cli.styledHeader(`Data Connector status for ${color.cyan(connector)}`)
     cli.styledObject({
       Status: res.status,
       'Service Name': res.uuid || 'Provisioning',
@@ -69,7 +69,7 @@ export default class CdcInfo extends BaseCommand {
     this.log()
 
     if (res.status === 'available') {
-      this.log(`Your postgres connector is now ${color.green('available')}.`)
+      this.log(`Your Data Connector is now ${color.green('available')}.`)
     }
   }
 }

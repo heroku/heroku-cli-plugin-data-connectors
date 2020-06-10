@@ -1,11 +1,11 @@
 import {cli} from 'cli-ux'
 import BaseCommand from '../../../lib/base'
 
-export default class ConnectorResume extends BaseCommand {
-  static description = 'Resume change event creation on a Postgres connector'
+export default class ConnectorsResume extends BaseCommand {
+  static description = 'Resume change event creation on a Data Connector'
 
   static examples = [
-    '$ heroku data:cdc:resume gentle-connector-1234',
+    '$ heroku data:connectors:resume gentle-connector-1234',
   ]
 
   static args = [
@@ -15,9 +15,9 @@ export default class ConnectorResume extends BaseCommand {
   ]
 
   async run() {
-    const {args} = this.parse(ConnectorResume)
+    const {args} = this.parse(ConnectorsResume)
 
-    cli.action.start(`Resuming Postgres connector ${args.connector}`)
+    cli.action.start(`Resuming Data Connector ${args.connector}`)
     try {
       await this.shogun.put(`/data/cdc/v0/connectors/${args.connector}/resume`,
         {

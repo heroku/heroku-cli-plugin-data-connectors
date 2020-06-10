@@ -16,11 +16,11 @@ A Heroku CLI Plugin for managing Change Data Capture connections
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g heroku-change-data-capture
+$ npm install -g @heroku-cli/data-connectors-plugin
 $ heroku COMMAND
 running command...
 $ heroku (-v|--version|version)
-heroku-change-data-capture/0.0.0 darwin-x64 node-v12.15.0
+@heroku-cli/data-connectors-plugin/0.0.0 darwin-x64 node-v12.15.0
 $ heroku --help [COMMAND]
 USAGE
   $ heroku COMMAND
@@ -29,22 +29,22 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`heroku data:cdc`](#heroku-datacdc)
-* [`heroku data:cdc:create`](#heroku-datacdccreate)
-* [`heroku data:cdc:destroy [CONNECTOR]`](#heroku-datacdcdestroy-connector)
-* [`heroku data:cdc:info [CDCID]`](#heroku-datacdcinfo-cdcid)
-* [`heroku data:cdc:pause [CONNECTOR]`](#heroku-datacdcpause-connector)
-* [`heroku data:cdc:resume [CONNECTOR]`](#heroku-datacdcresume-connector)
-* [`heroku data:cdc:update [CONNECTOR]`](#heroku-datacdcupdate-connector)
-* [`heroku data:cdc:wait [CONNECTOR]`](#heroku-datacdcwait-connector)
+* [`heroku data:connectors`](#heroku-dataconnectors)
+* [`heroku data:connectors:create`](#heroku-dataconnectorscreate)
+* [`heroku data:connectors:destroy [CONNECTOR]`](#heroku-dataconnectorsdestroy-connector)
+* [`heroku data:connectors:info [CONNECTOR]`](#heroku-dataconnectorsinfo-connector)
+* [`heroku data:connectors:pause [CONNECTOR]`](#heroku-dataconnectorspause-connector)
+* [`heroku data:connectors:resume [CONNECTOR]`](#heroku-dataconnectorsresume-connector)
+* [`heroku data:connectors:update [CONNECTOR]`](#heroku-dataconnectorsupdate-connector)
+* [`heroku data:connectors:wait [CONNECTOR]`](#heroku-dataconnectorswait-connector)
 
-## `heroku data:cdc`
+## `heroku data:connectors`
 
-List all Postgres connectors for a particular app or addon
+List all Data Connectors for a particular app or addon
 
 ```
 USAGE
-  $ heroku data:cdc
+  $ heroku data:connectors
 
 OPTIONS
   -a, --app=app        app to run command against
@@ -54,127 +54,127 @@ OPTIONS
   --table              Return the results as a table
 
 ALIASES
-  $ heroku data:cdc:list
+  $ heroku data:connectors:list
 
 EXAMPLES
-  heroku data:cdc -a your-app
-  heroku data:cdc --app=your-app --json
-  heroku data:cdc --addon=your-postgres-addon --table
+  heroku data:connectors -a your-app
+  heroku data:connectors --app=your-app --json
+  heroku data:connectors --addon=your-postgres-addon --table
 ```
 
-_See code: [src/commands/data/cdc/index.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/index.ts)_
+_See code: [src/commands/data/connectors/index.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/index.ts)_
 
-## `heroku data:cdc:create`
+## `heroku data:connectors:create`
 
-create a new Postgres Connector attached to your Kafka cluster
+create a new Data Connector
 
 ```
 USAGE
-  $ heroku data:cdc:create
+  $ heroku data:connectors:create
 
 OPTIONS
   -t, --table=table  (required) Tables to include
   --exclude=exclude  Columns to exclude
-  --source=source    (required) The name or ID of the Postgres instance whose change data you want to store
-  --store=store      (required) The name or ID of the Kafka instance that will store the change data
+  --source=source    (required) The name or ID of the database instance whose change data you want to store
+  --store=store      (required) The name or ID of the database instance that will store the change data
 
 EXAMPLES
-  $ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts --table 
-  public.comments
-  $ heroku data:cdc:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users --exclude 
-  public.users.password
+  $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts 
+  --table public.comments
+  $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users 
+  --exclude public.users.password
 ```
 
-_See code: [src/commands/data/cdc/create.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/create.ts)_
+_See code: [src/commands/data/connectors/create.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/create.ts)_
 
-## `heroku data:cdc:destroy [CONNECTOR]`
+## `heroku data:connectors:destroy [CONNECTOR]`
 
-destroy a Postgres Connector
+destroy a Data Connector
 
 ```
 USAGE
-  $ heroku data:cdc:destroy [CONNECTOR]
+  $ heroku data:connectors:destroy [CONNECTOR]
 
 EXAMPLE
-  $ heroku data:cdc:destroy gentle-connector-1234
+  $ heroku data:connectors:destroy gentle-connector-1234
 ```
 
-_See code: [src/commands/data/cdc/destroy.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/destroy.ts)_
+_See code: [src/commands/data/connectors/destroy.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/destroy.ts)_
 
-## `heroku data:cdc:info [CDCID]`
+## `heroku data:connectors:info [CONNECTOR]`
 
-get information about a CDC Connection
+get information about a Data Connector
 
 ```
 USAGE
-  $ heroku data:cdc:info [CDCID]
+  $ heroku data:connectors:info [CONNECTOR]
 
 OPTIONS
   --json  output in json format
 
 EXAMPLES
-  $ heroku cdc ad2a0126-aee2-4815-8e95-8367e3a2984b
-  $ heroku cdc ad2a0126-aee2-4815-8e95-8367e3a2984b --json
+  $ heroku data:connectors:info gentle-connector-1234
+  $ heroku data:connectors:info gentle-connector-1234 --json
 ```
 
-_See code: [src/commands/data/cdc/info.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/info.ts)_
+_See code: [src/commands/data/connectors/info.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/info.ts)_
 
-## `heroku data:cdc:pause [CONNECTOR]`
+## `heroku data:connectors:pause [CONNECTOR]`
 
-Pause change event creation on a Postgres connector
+Pause change event creation on a Data Connector
 
 ```
 USAGE
-  $ heroku data:cdc:pause [CONNECTOR]
+  $ heroku data:connectors:pause [CONNECTOR]
 
 EXAMPLE
-  heroku data:cdc:pause my-sweet-connector
+  $ heroku data:connectors:pause gentle-connector-1234
 ```
 
-_See code: [src/commands/data/cdc/pause.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/pause.ts)_
+_See code: [src/commands/data/connectors/pause.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/pause.ts)_
 
-## `heroku data:cdc:resume [CONNECTOR]`
+## `heroku data:connectors:resume [CONNECTOR]`
 
-Resume change event creation on a Postgres connector
+Resume change event creation on a Data Connector
 
 ```
 USAGE
-  $ heroku data:cdc:resume [CONNECTOR]
+  $ heroku data:connectors:resume [CONNECTOR]
 
 EXAMPLE
-  heroku data:cdc:resume my-sweet-connector
+  $ heroku data:connectors:resume gentle-connector-1234
 ```
 
-_See code: [src/commands/data/cdc/resume.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/resume.ts)_
+_See code: [src/commands/data/connectors/resume.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/resume.ts)_
 
-## `heroku data:cdc:update [CONNECTOR]`
+## `heroku data:connectors:update [CONNECTOR]`
 
-update the settings for a Postgres connector
+update the settings for a Data Connector
 
 ```
 USAGE
-  $ heroku data:cdc:update [CONNECTOR]
+  $ heroku data:connectors:update [CONNECTOR]
 
 OPTIONS
-  --setting=setting
+  --setting=setting  (required)
 
 EXAMPLE
-  $ heroku data:cdc:update ad2a0126-aee2-4815-8e95-8367e3a2984b --setting key=value --setting otherKey=otherValue
+  $ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue
 ```
 
-_See code: [src/commands/data/cdc/update.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/update.ts)_
+_See code: [src/commands/data/connectors/update.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/update.ts)_
 
-## `heroku data:cdc:wait [CONNECTOR]`
+## `heroku data:connectors:wait [CONNECTOR]`
 
-wait for your Postgres Connector to be provisioned
+wait for your Data Connector to be provisioned
 
 ```
 USAGE
-  $ heroku data:cdc:wait [CONNECTOR]
+  $ heroku data:connectors:wait [CONNECTOR]
 
 EXAMPLE
-  $ heroku data:cdc:wait gentle-connector-1234
+  $ heroku data:connectors:wait gentle-connector-1234
 ```
 
-_See code: [src/commands/data/cdc/wait.ts](https://github.com/heroku/heroku-change-data-capture/blob/v0.0.0/src/commands/data/cdc/wait.ts)_
+_See code: [src/commands/data/connectors/wait.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/wait.ts)_
 <!-- commandsstop -->

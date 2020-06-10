@@ -39,7 +39,7 @@ const connector = {
   ],
 }
 
-describe('data:cdc:info', () => {
+describe('data:connectors:info', () => {
   describe('when the connector is still provisioning', () => {
     test
     .nock('https://postgres-api.heroku.com', api => {
@@ -48,10 +48,10 @@ describe('data:cdc:info', () => {
       .reply(200, {...connector, status: 'creating'})
     })
     .stdout()
-    .command(['data:cdc:info', '123456'])
+    .command(['data:connectors:info', '123456'])
     .it('indicates the connector is still being provisioned', ctx => {
-      const expectedOutput = `The Postgres Connector is now being provisioned for 123456.
-Run heroku data:cdc:wait -a APP to check the creation process.`
+      const expectedOutput = `The Data Connector is now being provisioned for 123456.
+Run heroku data:connectors:wait ${connector.name} to check the creation process.`
 
       expect(ctx.stdout).to.include(expectedOutput)
     })
@@ -65,9 +65,9 @@ Run heroku data:cdc:wait -a APP to check the creation process.`
       .reply(200, connector)
     })
     .stdout()
-    .command(['data:cdc:info', '123456'])
+    .command(['data:connectors:info', '123456'])
     .it('returns the correct output', ctx => {
-      const expectedOutput = `=== Postgres Connector status for 123456
+      const expectedOutput = `=== Data Connector status for 123456
 Service Name: 123456
 Status:       available
 
@@ -80,7 +80,7 @@ Excluded Columns
 foo
 bar
 
-Your postgres connector is now available.`
+Your Data Connector is now available.`
 
       ctx.stdout.split('\n').forEach(line => {
         expect(expectedOutput).to.include(line.trim())
@@ -96,7 +96,7 @@ Your postgres connector is now available.`
       .reply(200, connector)
     })
     .stdout()
-    .command(['data:cdc:info', '123456', '--json'])
+    .command(['data:connectors:info', '123456', '--json'])
     .it('returns the correct JSON output', ctx => {
       expect(JSON.parse(ctx.stdout)).to.deep.equal(connector)
     })
