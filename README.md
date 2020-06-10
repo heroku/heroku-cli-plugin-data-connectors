@@ -159,7 +159,7 @@ OPTIONS
   --setting=setting  (required)
 
 EXAMPLE
-  $ heroku data:connectors:update ad2a0126-aee2-4815-8e95-8367e3a2984b --setting key=value --setting otherKey=otherValue
+  $ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue
 ```
 
 _See code: [src/commands/data/connectors/update.ts](https://github.com/heroku/data-connectors-plugin/blob/v0.0.0/src/commands/data/connectors/update.ts)_
