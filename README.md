@@ -9,6 +9,9 @@ A Heroku CLI Plugin for managing Heroku Data Connections
 [![Downloads/week](https://img.shields.io/npm/dw/@heroku-cli/plugin-data-connectors.svg)](https://npmjs.org/package/@heroku-cli/plugin-data-connectors)
 [![License](https://img.shields.io/npm/l/@heroku-cli/plugin-data-connectors.svg)](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/master/package.json)
 
+You can read more about Heroku Data Connectors on [Dev
+Center](https://devcenter.heroku.com/articles/heroku-data-connectors).
+
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
@@ -20,7 +23,7 @@ $ npm install -g @heroku-cli/plugin-data-connectors
 $ heroku COMMAND
 running command...
 $ heroku (-v|--version|version)
-@heroku-cli/plugin-data-connectors/0.0.2 darwin-x64 node-v12.15.0
+@heroku-cli/plugin-data-connectors/0.0.2 darwin-x64 node-v10.16.3
 $ heroku --help [COMMAND]
 USAGE
   $ heroku COMMAND
@@ -157,6 +160,10 @@ USAGE
 
 OPTIONS
   --setting=setting  (required)
+
+DESCRIPTION
+  See Dev Center for available settings: 
+  https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration
 
 EXAMPLE
   $ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue
