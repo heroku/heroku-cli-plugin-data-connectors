@@ -23,7 +23,7 @@ $ npm install -g @heroku-cli/plugin-data-connectors
 $ heroku COMMAND
 running command...
 $ heroku (-v|--version|version)
-@heroku-cli/plugin-data-connectors/0.0.2 darwin-x64 node-v10.16.3
+@heroku-cli/plugin-data-connectors/0.0.3 darwin-x64 node-v12.15.0
 $ heroku --help [COMMAND]
 USAGE
   $ heroku COMMAND
@@ -65,7 +65,7 @@ EXAMPLES
   heroku data:connectors --addon=your-postgres-addon --table
 ```
 
-_See code: [src/commands/data/connectors/index.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/index.ts)_
+_See code: [src/commands/data/connectors/index.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.3/src/commands/data/connectors/index.ts)_
 
 ## `heroku data:connectors:create`
 
@@ -88,7 +88,7 @@ EXAMPLES
   --exclude public.users.password
 ```
 
-_See code: [src/commands/data/connectors/create.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/create.ts)_
+_See code: [src/commands/data/connectors/create.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.3/src/commands/data/connectors/create.ts)_
 
 ## `heroku data:connectors:destroy [CONNECTOR]`
 
@@ -102,7 +102,7 @@ EXAMPLE
   $ heroku data:connectors:destroy gentle-connector-1234
 ```
 
-_See code: [src/commands/data/connectors/destroy.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/destroy.ts)_
+_See code: [src/commands/data/connectors/destroy.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.3/src/commands/data/connectors/destroy.ts)_
 
 ## `heroku data:connectors:info [CONNECTOR]`
 
@@ -120,7 +120,7 @@ EXAMPLES
   $ heroku data:connectors:info gentle-connector-1234 --json
 ```
 
-_See code: [src/commands/data/connectors/info.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/info.ts)_
+_See code: [src/commands/data/connectors/info.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.3/src/commands/data/connectors/info.ts)_
 
 ## `heroku data:connectors:pause [CONNECTOR]`
 
@@ -134,7 +134,7 @@ EXAMPLE
   $ heroku data:connectors:pause gentle-connector-1234
 ```
 
-_See code: [src/commands/data/connectors/pause.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/pause.ts)_
+_See code: [src/commands/data/connectors/pause.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.3/src/commands/data/connectors/pause.ts)_
 
 ## `heroku data:connectors:resume [CONNECTOR]`
 
@@ -148,7 +148,7 @@ EXAMPLE
   $ heroku data:connectors:resume gentle-connector-1234
 ```
 
-_See code: [src/commands/data/connectors/resume.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/resume.ts)_
+_See code: [src/commands/data/connectors/resume.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.3/src/commands/data/connectors/resume.ts)_
 
 ## `heroku data:connectors:update [CONNECTOR]`
 
@@ -169,7 +169,7 @@ EXAMPLE
   $ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue
 ```
 
-_See code: [src/commands/data/connectors/update.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/update.ts)_
+_See code: [src/commands/data/connectors/update.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.3/src/commands/data/connectors/update.ts)_
 
 ## `heroku data:connectors:wait [CONNECTOR]`
 
@@ -183,5 +183,5 @@ EXAMPLE
   $ heroku data:connectors:wait gentle-connector-1234
 ```
 
-_See code: [src/commands/data/connectors/wait.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/wait.ts)_
+_See code: [src/commands/data/connectors/wait.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.3/src/commands/data/connectors/wait.ts)_
 <!-- commandsstop -->
