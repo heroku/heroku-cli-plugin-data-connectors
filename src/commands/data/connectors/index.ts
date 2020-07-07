@@ -75,6 +75,14 @@ export default class ConnectorsList extends BaseCommand {
       cli.error('You must pass either the --app or --addon flag')
     }
 
+    if (flags.json) {
+      connectorInfo.forEach(v => {
+        cli.styledJSON(v)
+        this.log()
+      })
+      return
+    }
+
     cli.styledHeader(`Data Connector info for ${flags.app || flags.addon}`)
 
     if (flags.table) {
@@ -88,11 +96,6 @@ export default class ConnectorsList extends BaseCommand {
           header: 'Postgres Add-On',
           get: row => row.name,
         },
-      })
-    } else if (flags.json) {
-      connectorInfo.forEach(v => {
-        cli.styledJSON(v)
-        this.log()
       })
     } else {
       connectorInfo.forEach(v => {
