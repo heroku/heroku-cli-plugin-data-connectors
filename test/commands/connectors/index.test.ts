@@ -101,6 +101,7 @@ pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a kafka-metric-96658 postgresql-rectangu
       const actualOutput = ctx.stdout.split('\n').map(line => {
         return line.replace(/\s+/g, ' ').trim()
       })
+      expect(actualOutput[2]).to.eq('pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a kafka-metric-96658 postgresql-rectangular-10992')
       expectedOutput.split('\n').forEach(expectedLine => {
         expect(actualOutput).to.include(expectedLine.replace(/\s+/g, ' ').trim())
       })
