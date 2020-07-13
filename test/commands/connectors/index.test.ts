@@ -98,7 +98,7 @@ Connector Name Kafka Add-On Postgres Add-On
 pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a kafka-metric-96658 postgresql-rectangular-10992
 pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a kafka-metric-96658 postgresql-rectangular-10992`
 
-      const actualOutput = ctx.stdout
+      const actualOutput = ctx.stdout.replace(/ +/g, ' ')
       expectedOutput.split('\n').forEach(expectedLine => {
         expect(actualOutput).to.include(expectedLine.trim().replace(/\s+/g, ' '))
       })
