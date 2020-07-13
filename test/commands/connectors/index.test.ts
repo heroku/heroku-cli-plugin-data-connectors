@@ -94,13 +94,13 @@ Postgres Add-On: postgresql-rectangular-10992`
     .command(['data:connectors', `--app=${appName}`, '--table'])
     .it('returns the correct table output', ctx => {
       const expectedOutput = `=== Data Connector info for ${appName}
-Connector Name                            Kafka Add-On       Postgres Add-On
+Connector Name Kafka Add-On Postgres Add-On
 pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a kafka-metric-96658 postgresql-rectangular-10992
 pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a kafka-metric-96658 postgresql-rectangular-10992`
 
       const actualOutput = ctx.stdout
       expectedOutput.split('\n').forEach(expectedLine => {
-        expect(actualOutput).to.include(expectedLine.trim())
+        expect(actualOutput).to.include(expectedLine.trim().replace(/\s+/g, ' '))
       })
     })
   })
