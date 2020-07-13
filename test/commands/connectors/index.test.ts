@@ -101,7 +101,6 @@ brave-connector-35864 kafka-metric-96658 postgresql-rectangular-10992`
       const actualOutput = ctx.stdout.split('\n').map(line => {
         return line.replace(/\s+/g, ' ').trim()
       })
-      expect(actualOutput[2]).to.eq('brave-connector-35864 kafka-metric-96658 postgresql-rectangular-10992')
       expectedOutput.split('\n').forEach(expectedLine => {
         expect(actualOutput).to.include(expectedLine.replace(/\s+/g, ' ').trim())
       })
