@@ -76,6 +76,33 @@ Postgres Add-On: postgresql-rectangular-10992`
         expect(expectedOutput).to.include(v.trim())
       })
     })
+
+    test
+    .nock('https://api.heroku.com', api => {
+      api
+      .get(`/apps/${appName}`)
+      .reply(200, {
+        id: appId,
+      })
+    })
+    .nock('https://postgres-api.heroku.com', api => {
+      api
+      .get(`/data/cdc/v0/apps/${appId}`)
+      .reply(200, connectorList)
+    })
+    .stdout()
+    .command(['data:connectors', `--app=${appName}`, '--table'])
+    .it('returns the correct table output', ctx => {
+      const expectedOutput = `=== Data Connector info for ${appName}
+Connector Name                            Kafka Add-On       Postgres Add-On
+pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a kafka-metric-96658 postgresql-rectangular-10992
+pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a kafka-metric-96658 postgresql-rectangular-10992`
+
+      const actualOutput = ctx.stdout
+      expectedOutput.split('\n').forEach(expectedLine => {
+        expect(actualOutput).to.include(expectedLine.trim())
+      })
+    })
   })
 
   describe('using the addon flag', () => {

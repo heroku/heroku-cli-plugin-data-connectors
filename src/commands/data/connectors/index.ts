@@ -90,11 +90,11 @@ export default class ConnectorsList extends BaseCommand {
         name: {header: 'Connector Name'},
         kafka_addon: {
           header: 'Kafka Add-On',
-          get: row => row.name,
+          get: row => row.kafka_addon.name,
         },
         postgres_addon: {
           header: 'Postgres Add-On',
-          get: row => row.name,
+          get: row => row.postgres_addon.name,
         },
       })
     } else {
