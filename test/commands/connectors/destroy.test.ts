@@ -1,21 +1,34 @@
 import {expect, test} from '@oclif/test'
+import cli from 'cli-ux'
 
 const connectorId = '123456'
 
 describe('data:connectors:destroy', () => {
   test
+  .stdout()
+  .stub(cli, 'confirm', () => async () => true)
   .nock('https://postgres-api.heroku.com', api => {
     api
     .delete(`/data/cdc/v0/connectors/${connectorId}`)
     .reply(200)
   })
-  .stdout()
   .command([
     'data:connectors:destroy',
     connectorId,
   ])
   .it('works', ctx => {
     const expectedOutput = `Data Connector ${connectorId} deleted successfully.`
+    expect(ctx.stdout.trim()).to.include(expectedOutput)
+  })
+
+  test
+  .stdout()
+  .command([
+    'data:connectors:destroy',
+    connectorId,
+  ])
+  .it('waits for confirmation', ctx => {
+    const expectedOutput = `Are you sure you would like to destroy connector ${connectorId} (y/n)?`
     expect(ctx.stdout.trim()).to.include(expectedOutput)
   })
 
