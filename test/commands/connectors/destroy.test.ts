@@ -22,17 +22,6 @@ describe('data:connectors:destroy', () => {
   })
 
   test
-  .stdout()
-  .command([
-    'data:connectors:destroy',
-    connectorId,
-  ])
-  .it('waits for confirmation', ctx => {
-    const expectedOutput = `Are you sure you would like to destroy connector ${connectorId} (y/n)?`
-    expect(ctx.stdout.trim()).to.include(expectedOutput)
-  })
-
-  test
   .nock('https://postgres-api.heroku.com', api => {
     api
     .delete(`/data/cdc/v0/connectors/${connectorId}`)
