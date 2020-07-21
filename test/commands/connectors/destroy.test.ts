@@ -7,6 +7,7 @@ describe('data:connectors:destroy', () => {
   test
   .stdout()
   .stub(cli, 'confirm', () => async () => true)
+  .stderr()
   .nock('https://postgres-api.heroku.com', api => {
     api
     .delete(`/data/cdc/v0/connectors/${connectorId}`)
@@ -22,13 +23,14 @@ describe('data:connectors:destroy', () => {
   })
 
   test
+  .stdout()
+  .stub(cli, 'confirm', () => async () => true)
+  .stderr()
   .nock('https://postgres-api.heroku.com', api => {
     api
     .delete(`/data/cdc/v0/connectors/${connectorId}`)
     .replyWithError('negative ghost rider, the pattern is full')
   })
-  .stdout()
-  .stderr()
   .command([
     'data:connectors:destroy',
     connectorId,

@@ -22,6 +22,7 @@ export default class ConnectorsDestroy extends BaseCommand {
 
   static examples = [
     '$ heroku data:connectors:destroy gentle-connector-1234',
+    '$ heroku data:connectors:destroy gentle-connector-1234 --confirm',
   ]
 
   async run() {
