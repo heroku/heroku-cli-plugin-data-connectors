@@ -25,9 +25,9 @@ export default class ConnectorsDestroy extends BaseCommand {
   ]
 
   async run() {
-    const {args} = this.parse(ConnectorsDestroy)
+    const {args,flags} = this.parse(ConnectorsDestroy)
     const connector = args.connector
-    const confirm = flags
+    const confirm = flags.confirm
     const confirmed = confirm || await cli.confirm(`Are you sure you would like to destroy connector ${color.cyan(connector)} (y/n)?`)
 
     if (confirmed) {
