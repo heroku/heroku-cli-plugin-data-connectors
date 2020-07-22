@@ -23,7 +23,7 @@ const connectorList = [
       uuid: '677abc7a-839a-4589-86c3-e0a28a882690',
     },
     uuid: '123456',
-    name: 'pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a',
+    name: 'brave-connector-35864',
   },
   {
     kafka_app: {
@@ -41,7 +41,7 @@ const connectorList = [
       uuid: '677abc7a-839a-4589-86c3-e0a28a882690',
     },
     uuid: '123456',
-    name: 'pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a',
+    name: 'brave-connector-35864',
   },
 ]
 
@@ -64,16 +64,45 @@ describe('data:connectors', () => {
     .command(['data:connectors', `--app=${appName}`])
     .it('returns the correct output', ctx => {
       const expectedOutput = `=== Data Connector info for ${appName}
-Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
+Connector Name:  brave-connector-35864
 Kafka Add-On:    kafka-metric-96658
 Postgres Add-On: postgresql-rectangular-10992
 
-Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
+Connector Name:  brave-connector-35864
 Kafka Add-On:    kafka-metric-96658
 Postgres Add-On: postgresql-rectangular-10992`
 
       ctx.stdout.split('\n').forEach(v => {
         expect(expectedOutput).to.include(v.trim())
+      })
+    })
+
+    test
+    .nock('https://api.heroku.com', api => {
+      api
+      .get(`/apps/${appName}`)
+      .reply(200, {
+        id: appId,
+      })
+    })
+    .nock('https://postgres-api.heroku.com', api => {
+      api
+      .get(`/data/cdc/v0/apps/${appId}`)
+      .reply(200, connectorList)
+    })
+    .stdout()
+    .command(['data:connectors', `--app=${appName}`, '--table'])
+    .it('returns the correct table output', ctx => {
+      const expectedOutput = `=== Data Connector info for ${appName}
+Connector Name Kafka Add-On Postgres Add-On
+brave-connector-35864 kafka-metric-96658 postgresql-rectangular-10992
+brave-connector-35864 kafka-metric-96658 postgresql-rectangular-10992`
+
+      const actualOutput = ctx.stdout.split('\n').map(line => {
+        return line.replace(/\s+/g, ' ').trim()
+      })
+      expectedOutput.split('\n').forEach(expectedLine => {
+        expect(actualOutput).to.include(expectedLine.replace(/\s+/g, ' ').trim())
       })
     })
   })
@@ -98,11 +127,11 @@ Postgres Add-On: postgresql-rectangular-10992`
     .command(['data:connectors', `--addon=${kafkaName}`])
     .it('returns the correct output', ctx => {
       const expectedOutput = `=== Data Connector info for ${kafkaName}
-Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
+Connector Name:  brave-connector-35864
 Kafka Add-On:    kafka-metric-96658
 Postgres Add-On: postgresql-rectangular-10992
 
-Connector Name:  pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a
+Connector Name:  brave-connector-35864
 Kafka Add-On:    kafka-metric-96658
 Postgres Add-On: postgresql-rectangular-10992`
 
