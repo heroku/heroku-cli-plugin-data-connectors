@@ -13,6 +13,7 @@ const kafkaTenant = {
     'public.foo.column1',
   ],
   image_tag: '',
+  name: 'my-cdc-connector',
 }
 
 describe('data:connectors:create', () => {
@@ -33,6 +34,7 @@ describe('data:connectors:create', () => {
     '--table=public.foo',
     '--table=public.bar',
     '--exclude=public.foo.column1',
+    '--name=my-cdc-connector',
   ])
   .it('works', ctx => {
     expect(ctx.stdout.trim()).to.include(expectedOutput)

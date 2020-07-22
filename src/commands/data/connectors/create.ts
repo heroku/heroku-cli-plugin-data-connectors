@@ -16,6 +16,10 @@ export default class ConnectorsCreate extends BaseCommand {
       required: true,
       description: 'The name or ID of the database instance that will store the change data',
     }),
+    name: flags.string({
+      required: false,
+      description: 'Name of the connector',
+    }),
     table: flags.string({
       char: 't',
       description: 'Tables to include',
@@ -44,6 +48,7 @@ export default class ConnectorsCreate extends BaseCommand {
     const tables = flags.table
     const excluded = flags.exclude || []
     const imageTag = flags['image-tag'] || ''
+    const name = flags.name || ''
 
     cli.action.start('Creating Data Connector')
     const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka}`, {
@@ -53,6 +58,7 @@ export default class ConnectorsCreate extends BaseCommand {
         tables,
         excluded_columns: excluded,
         image_tag: imageTag,
+        name: name,
       },
     })
     cli.action.stop()

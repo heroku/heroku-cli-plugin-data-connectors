@@ -78,6 +78,7 @@ USAGE
 OPTIONS
   -t, --table=table  (required) Tables to include
   --exclude=exclude  Columns to exclude
+  --name=my-cdc      Name of the connector 
   --source=source    (required) The name or ID of the database instance whose change data you want to store
   --store=store      (required) The name or ID of the database instance that will store the change data
 
