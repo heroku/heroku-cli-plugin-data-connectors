@@ -6,7 +6,6 @@ const connectorId = '123456'
 describe('data:connectors:destroy', () => {
   test
   .stdout()
-  .stub(cli, 'confirm', () => async () => connectorId)
   .stderr()
   .nock('https://postgres-api.heroku.com', api => {
     api
@@ -16,6 +15,7 @@ describe('data:connectors:destroy', () => {
   .command([
     'data:connectors:destroy',
     connectorId,
+    `--confirm  ${connectorId}`,
   ])
   .it('works', ctx => {
     const expectedOutput = `Data Connector ${connectorId} deleted successfully.`
@@ -24,7 +24,6 @@ describe('data:connectors:destroy', () => {
 
   test
   .stdout()
-  .stub(cli, 'confirm', () => async () => connectorId)
   .stderr()
   .nock('https://postgres-api.heroku.com', api => {
     api
@@ -34,6 +33,7 @@ describe('data:connectors:destroy', () => {
   .command([
     'data:connectors:destroy',
     connectorId,
+    `--confirm  ${connectorId}`,
   ])
   .catch(error => {
     expect(error.message).to.equal('negative ghost rider, the pattern is full')
