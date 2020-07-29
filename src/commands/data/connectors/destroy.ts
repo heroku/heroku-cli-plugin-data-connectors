@@ -15,7 +15,7 @@ export default class ConnectorsDestroy extends BaseCommand {
   ]
 
   static flags = {
-    confirm: flags.boolean({
+    confirm: flags.string({
       description: 'confirms destroying the connector if passed in',
       required: false,
     }),
