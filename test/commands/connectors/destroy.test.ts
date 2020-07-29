@@ -6,7 +6,7 @@ const connectorId = '123456'
 describe('data:connectors:destroy', () => {
   test
   .stdout()
-  .stub(cli, 'confirm', () => async () => true)
+  .stub(cli, 'confirm', () => async () => connectorId)
   .stderr()
   .nock('https://postgres-api.heroku.com', api => {
     api
@@ -24,7 +24,7 @@ describe('data:connectors:destroy', () => {
 
   test
   .stdout()
-  .stub(cli, 'confirm', () => async () => true)
+  .stub(cli, 'confirm', () => async () => connectorId)
   .stderr()
   .nock('https://postgres-api.heroku.com', api => {
     api
