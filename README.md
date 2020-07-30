@@ -99,11 +99,11 @@ USAGE
   $ heroku data:connectors:destroy [CONNECTOR]
 
 OPTIONS
-  --confirm  confirms destroying the connector if passed in
+  --confirm=confirm  confirms destroying the connector if passed in
 
 EXAMPLES
   $ heroku data:connectors:destroy gentle-connector-1234
-  $ heroku data:connectors:destroy gentle-connector-1234 --confirm
+  $ heroku data:connectors:destroy gentle-connector-1234 --confirm gentle-connector-1234
 ```
 
 _See code: [src/commands/data/connectors/destroy.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.0.2/src/commands/data/connectors/destroy.ts)_
