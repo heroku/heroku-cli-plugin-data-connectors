@@ -14,8 +14,8 @@ describe('data:connectors:destroy', () => {
   })
   .command([
     'data:connectors:destroy',
+    `--confirm=${connectorId}`,
     connectorId,
-    `--confirm  ${connectorId}`,
   ])
   .it('works', ctx => {
     const expectedOutput = `Data Connector ${connectorId} deleted successfully.`
@@ -32,8 +32,8 @@ describe('data:connectors:destroy', () => {
   })
   .command([
     'data:connectors:destroy',
+    `--confirm=${connectorId}`,
     connectorId,
-    `--confirm  ${connectorId}`,
   ])
   .catch(error => {
     expect(error.message).to.equal('negative ghost rider, the pattern is full')
