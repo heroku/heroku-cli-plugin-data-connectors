@@ -1,9 +1,7 @@
 import {cli} from 'cli-ux'
-import color from '@heroku-cli/color'
 import {flags} from '@heroku-cli/command'
-import {CLIError} from '@oclif/errors'
 
-import BaseCommand, {PostgresConnector} from '../../../lib/base'
+import BaseCommand, {confirmConnector, PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsDestroy extends BaseCommand {
   static description = 'destroy a Data Connector'
@@ -29,22 +27,17 @@ export default class ConnectorsDestroy extends BaseCommand {
   async run() {
     const {args, flags} = this.parse(ConnectorsDestroy)
     const connector = args.connector
-    const confirm = flags.confirm
-    const confirmed = confirm || await cli.prompt(`To proceed, type ${color.bold.red(connector)} or re-run this command with ${color.bold.red('--confirm', connector)}`)
 
-    if (confirmed === connector) {
-      cli.action.start('Destroying Data Connector')
-      try {
-        await this.shogun.delete<PostgresConnector>(`/data/cdc/v0/connectors/${connector}`, this.shogun.defaults)
-        this.log(`Data Connector ${connector} deleted successfully.`)
-      } catch (error) {
-        this.warn('There was an issue deleting your Data Connector.')
-        throw error
-      } finally {
-        cli.action.stop()
-      }
-    } else {
-      throw new CLIError(`Confirmation did not match ${color.bold.red(connector)}. Aborted.`)
+    await confirmConnector(connector, flags.confirm)
+    cli.action.start('Destroying Data Connector')
+    try {
+      await this.shogun.delete<PostgresConnector>(`/data/cdc/v0/connectors/${connector}`, this.shogun.defaults)
+      this.log(`Data Connector ${connector} deleted successfully.`)
+    } catch (error) {
+      this.warn('There was an issue deleting your Data Connector.')
+      throw error
+    } finally {
+      cli.action.stop()
     }
   }
 }
