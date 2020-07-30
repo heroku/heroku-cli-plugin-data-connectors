@@ -2,7 +2,7 @@ import {APIClient, Command} from '@heroku-cli/command'
 import {IConfig} from '@oclif/config'
 import {cli} from 'cli-ux'
 import color from '@heroku-cli/color'
-import {error, warn} from '@oclif/errors'
+import {error} from '@oclif/errors'
 
 export default abstract class Base extends Command {
   shogun: APIClient;
@@ -33,17 +33,17 @@ export interface PostgresConnector {
   uuid: string;
 }
 
-export function confirmConnector (connector: string, confirm: string | undefined) {
-    return new Promise(function (resolve: any, reject: any) {
-      if (confirm) {
-        if (confirm == connector) return resolve()
-        return reject(error(`Confirmation ${color.bold.red(confirm)} did not match ${color.bold.red(connector)}. Aborted.`))
-      }
-      console.error()
-      cli.prompt(`To proceed, type ${color.bold.red(connector)} or re-run this command with ${color.bold.red('--confirm', connector)}`).then(function (confirm: string) {
-        if (confirm === connector) return resolve()
-        return reject(error(`Confirmation did not match ${color.bold.red(connector)}. Aborted.`))
-      })
+export function confirmConnector(connector: string, confirm: string | undefined) {
+  return new Promise(function (resolve: any, reject: any) {
+    if (confirm) {
+      if (confirm === connector) return resolve()
+      return reject(error(`Confirmation ${color.bold.red(confirm)} did not match ${color.bold.red(connector)}. Aborted.`))
+    }
+    error('')
+    cli.prompt(`To proceed, type ${color.bold.red(connector)} or re-run this command with ${color.bold.red('--confirm', connector)}`).then(function (confirm: string) {
+      if (confirm === connector) return resolve()
+      return reject(error(`Confirmation did not match ${color.bold.red(connector)}. Aborted.`))
     })
-  }
+  })
+}
 

@@ -1,5 +1,4 @@
 import {expect, test} from '@oclif/test'
-import cli from 'cli-ux'
 
 const connectorId = '123456'
 
