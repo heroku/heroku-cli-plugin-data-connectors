@@ -1,6 +1,6 @@
 import {expect, test} from '@oclif/test'
 
-const connectorId = '123456'
+const connectorId = 'gentle-connector-1234'
 
 describe('data:connectors:destroy', () => {
   test
@@ -39,6 +39,19 @@ describe('data:connectors:destroy', () => {
   })
   .it('shows an error message when there is an error', ctx => {
     const expectedOutput = 'There was an issue deleting your Data Connector.'
+    expect(ctx.stderr.trim()).to.include(expectedOutput)
+  })
+
+  test
+  .stdout()
+  .stderr()
+  .command([
+    'data:connectors:destroy',
+    `--confirm=not_correct`,
+    connectorId,
+  ])
+  .it('shows an error message when there is an error', ctx => {
+    const expectedOutput = "Confirmation not_correct did not match gentle-connector-1234. Aborted."
     expect(ctx.stderr.trim()).to.include(expectedOutput)
   })
 })

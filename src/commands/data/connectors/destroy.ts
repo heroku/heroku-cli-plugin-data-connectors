@@ -27,8 +27,10 @@ export default class ConnectorsDestroy extends BaseCommand {
   async run() {
     const {args, flags} = this.parse(ConnectorsDestroy)
     const connector = args.connector
+    const confirm = flags.confirm || ""
 
-    await confirmConnector(connector, flags.confirm)
+    await confirmConnector(connector, confirm)
+
     cli.action.start('Destroying Data Connector')
     try {
       await this.shogun.delete<PostgresConnector>(`/data/cdc/v0/connectors/${connector}`, this.shogun.defaults)
