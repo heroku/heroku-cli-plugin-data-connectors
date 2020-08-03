@@ -27,7 +27,7 @@ export default class ConnectorsDestroy extends BaseCommand {
   async run() {
     const {args, flags} = this.parse(ConnectorsDestroy)
     const connector = args.connector
-    const confirm = flags.confirm || ""
+    const confirm = flags.confirm || ''
 
     await confirmConnector(connector, confirm)
 

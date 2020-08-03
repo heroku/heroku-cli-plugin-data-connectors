@@ -36,7 +36,7 @@ export async function confirmConnector(connector: string, confirm: string) {
   if (!confirm) {
     confirm = await cli.prompt(`To proceed, type ${color.bold.red(connector)} or re-run this command with ${color.bold.red('--confirm', connector)}`)
   }
-  if (confirm != connector) {
+  if (confirm !== connector) {
     cli.error(`Confirmation ${color.bold.red(confirm)} did not match ${color.bold.red(connector)}. Aborted.`)
   }
 }

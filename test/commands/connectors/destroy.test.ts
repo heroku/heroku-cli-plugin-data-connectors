@@ -47,11 +47,11 @@ describe('data:connectors:destroy', () => {
   .stderr()
   .command([
     'data:connectors:destroy',
-    `--confirm=not_correct`,
+    '--confirm=not_correct',
     connectorId,
   ])
-  .it('shows an error message when there is an error', ctx => {
-    const expectedOutput = "Confirmation not_correct did not match gentle-connector-1234. Aborted."
-    expect(ctx.stderr.trim()).to.include(expectedOutput)
+  .catch(error => {
+    const expectedError = `Confirmation not_correct did not match ${connectorId}. Aborted.`
+    expect(error.message).to.include(expectedError)
   })
 })
