@@ -1,5 +1,7 @@
 import {APIClient, Command} from '@heroku-cli/command'
 import {IConfig} from '@oclif/config'
+import {cli} from 'cli-ux'
+import color from '@heroku-cli/color'
 
 export default abstract class Base extends Command {
   shogun: APIClient;
@@ -28,4 +30,13 @@ export interface PostgresConnector {
   tables: string[];
   topics: {table_name: string; topic_name: string}[];
   uuid: string;
+}
+
+export async function confirmConnector(connector: string, confirm: string) {
+  if (!confirm) {
+    confirm = await cli.prompt(`To proceed, type ${color.bold.red(connector)} or re-run this command with ${color.bold.red('--confirm', connector)}`)
+  }
+  if (confirm !== connector) {
+    cli.error(`Confirmation ${color.bold.red(confirm)} did not match ${color.bold.red(connector)}. Aborted.`)
+  }
 }
