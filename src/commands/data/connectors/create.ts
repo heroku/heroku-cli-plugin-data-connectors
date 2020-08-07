@@ -35,6 +35,10 @@ export default class ConnectorsCreate extends BaseCommand {
       required: false,
       hidden: true,
     }),
+    'accept-beta': flags.boolean({
+      required: false,
+      hidden: true,
+    }),
   }
 
   static examples = [
@@ -48,7 +52,12 @@ export default class ConnectorsCreate extends BaseCommand {
     const tables = flags.table
     const excluded = flags.exclude || []
     const imageTag = flags['image-tag'] || ''
+    const confirm = flags['accept-beta'] || false
     const name = flags.name || ''
+
+    if (!confirm) {
+      await cli.prompt('Do you agree to the TOC for this beta offering? (y/n)')
+    }
 
     cli.action.start('Creating Data Connector')
     const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka}`, {
@@ -64,12 +73,15 @@ export default class ConnectorsCreate extends BaseCommand {
     cli.action.stop()
     this.log()
     cli.styledObject({
+      Name: res.name,
       Status: res.status,
     })
 
     this.log()
+    this.log('This offering is in a beta period. By provisioning this connector, you agree to the beta terms.')
+    this.log('Details can be reviewed at: some-url')
+    this.log()
     this.log(`The Data Connector is now being provisioned for ${color.cyan(kafka)}.`)
-    this.log('Run ' + color.cyan('heroku data:connectors:wait ' + res.name) +
-             ' to check the creation process.')
+    this.log(`Run ${color.cyan('heroku data:connectors:wait ' + res.name)} to check the creation process.`)
   }
 }
