@@ -5,9 +5,9 @@ A Heroku CLI Plugin for managing Heroku Data Connections
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@heroku-cli/plugin-data-connectors.svg)](https://npmjs.org/package/@heroku-cli/plugin-data-connectors)
-[![CircleCI](https://circleci.com/gh/heroku/heroku-cli-plugin-data-connectors/tree/master.svg?style=shield)](https://circleci.com/gh/heroku/heroku-cli-plugin-data-connectors/tree/master)
+[![CircleCI](https://circleci.com/gh/heroku/heroku-cli-plugin-data-connectors/tree/main.svg?style=shield)](https://circleci.com/gh/heroku/heroku-cli-plugin-data-connectors/tree/main)
 [![Downloads/week](https://img.shields.io/npm/dw/@heroku-cli/plugin-data-connectors.svg)](https://npmjs.org/package/@heroku-cli/plugin-data-connectors)
-[![License](https://img.shields.io/npm/l/@heroku-cli/plugin-data-connectors.svg)](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/@heroku-cli/plugin-data-connectors.svg)](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/main/package.json)
 
 You can read more about Heroku Data Connectors on [Dev
 Center](https://devcenter.heroku.com/articles/heroku-data-connectors).
@@ -83,9 +83,9 @@ OPTIONS
   --store=store      (required) The name or ID of the database instance that will store the change data
 
 EXAMPLES
-  $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts 
+  $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts
   --table public.comments
-  $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users 
+  $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users
   --exclude public.users.password
 ```
 
@@ -167,7 +167,7 @@ OPTIONS
   --setting=setting  (required)
 
 DESCRIPTION
-  See Dev Center for available settings: 
+  See Dev Center for available settings:
   https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration
 
 EXAMPLE
