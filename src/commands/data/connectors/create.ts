@@ -30,8 +30,8 @@ export default class ConnectorsCreate extends BaseCommand {
       description: 'Columns to exclude',
       multiple: true,
     }),
-    'image-tag': flags.string({
-      char: 'i',
+    'platform-version': flags.string({
+      char: 'p',
       required: false,
       hidden: true,
     }),
@@ -47,7 +47,7 @@ export default class ConnectorsCreate extends BaseCommand {
     const {source: postgres, store: kafka} = flags
     const tables = flags.table
     const excluded = flags.exclude || []
-    const imageTag = flags['image-tag'] || ''
+    const platformVersion = flags['platform-version'] || ''
     const name = flags.name || ''
 
     cli.action.start('Creating Data Connector')
@@ -57,7 +57,7 @@ export default class ConnectorsCreate extends BaseCommand {
         postgres_addon_uuid: postgres,
         tables,
         excluded_columns: excluded,
-        image_tag: imageTag,
+        platform_version: platformVersion,
         name: name,
       },
     })
