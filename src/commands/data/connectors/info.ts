@@ -46,6 +46,7 @@ export default class ConnectorsInfo extends BaseCommand {
 
     cli.styledHeader(`Data Connector status for ${color.cyan(connector)}`)
     cli.styledObject({
+      Lag: res.lag,
       Status: res.status,
       'Service Name': res.uuid || 'Provisioning',
     })
