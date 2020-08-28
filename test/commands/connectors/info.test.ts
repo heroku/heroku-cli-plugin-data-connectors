@@ -18,6 +18,7 @@ const connector = {
   uuid: '123456',
   name: 'pg2k_a9cc07b4_2a8c_438d_8e54_db08073e5a9a',
   status: 'available',
+  lag: '< 1 MB',
   created_at: '2020-05-05 15:37:21 +0000',
   tables: [
     'public.posts',
@@ -68,6 +69,7 @@ Run heroku data:connectors:wait ${connector.name} to check the creation process.
     .command(['data:connectors:info', '123456'])
     .it('returns the correct output', ctx => {
       const expectedOutput = `=== Data Connector status for 123456
+Lag:          < 1 MB
 Service Name: 123456
 Status:       available
 

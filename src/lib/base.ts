@@ -24,6 +24,7 @@ export interface PostgresConnector {
   kafka_addon: {name: string; uuid: string};
   kafka_app: {name: string};
   name: string;
+  lag: string;
   postgres_addon: {name: string; uuid: string};
   postgres_app: {name: string};
   status: 'creating' | 'available';
