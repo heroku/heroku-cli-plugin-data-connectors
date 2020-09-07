@@ -35,6 +35,7 @@ export default class ConnectorsDestroy extends BaseCommand {
     try {
       await this.shogun.delete<PostgresConnector>(`/data/cdc/v0/connectors/${connector}`, this.shogun.defaults)
       this.log(`Data Connector ${connector} deleted successfully.`)
+      this.log('Note: We do not delete your Kafka topics automatically, because they could still contain messages which you haven\'t consumed. Please delete the topics manually. See heroku kafka:topics:destroy --help')
     } catch (error) {
       this.warn('There was an issue deleting your Data Connector.')
       throw error
