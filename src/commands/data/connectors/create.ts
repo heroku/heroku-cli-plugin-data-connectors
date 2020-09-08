@@ -50,7 +50,7 @@ export default class ConnectorsCreate extends BaseCommand {
     const platformVersion = flags['platform-version'] || ''
     const name = flags.name || ''
 
-    cli.action.start('Creating Data Connector')
+    cli.action.start('Provisioning Data Connector')
     const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka}`, {
       ...this.shogun.defaults,
       body: {
@@ -62,13 +62,13 @@ export default class ConnectorsCreate extends BaseCommand {
       },
     })
     cli.action.stop()
-    this.log()
-    cli.styledObject({
-      Status: res.status,
-    })
 
     this.log()
-    this.log(`The Data Connector is now being provisioned for ${color.cyan(kafka)}.`)
+    cli.styledObject({
+      Name: res.name,
+      Status: res.status,
+    })
+    this.log()
     this.log('Run ' + color.cyan('heroku data:connectors:wait ' + res.name) +
              ' to check the creation process.')
   }
