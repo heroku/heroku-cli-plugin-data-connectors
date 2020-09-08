@@ -19,6 +19,7 @@ describe('data:connectors:destroy', () => {
   .it('works', ctx => {
     const expectedOutput = `Data Connector ${connectorId} deleted successfully.`
     expect(ctx.stdout.trim()).to.include(expectedOutput)
+    expect(ctx.stdout.trim()).to.include('Note: We do not delete your Kafka topics automatically, because they could still contain messages which you haven\'t consumed. Please delete the topics manually. See heroku kafka:topics:destroy --help')
   })
 
   test
