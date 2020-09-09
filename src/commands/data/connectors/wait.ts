@@ -3,7 +3,7 @@ import {cli} from 'cli-ux'
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsWait extends BaseCommand {
-  static description = 'wait for your Data Connector to be provisioned'
+  static description = 'Wait for your Data Connector to be provisioned\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors'
 
   static args = [
     {name: 'connector'},
