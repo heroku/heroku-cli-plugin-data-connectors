@@ -37,7 +37,7 @@ export default class ConnectorsList extends BaseCommand {
       exclusive: ['json'],
     }),
     json: flags.boolean({
-      description: 'Return the results as json',
+      description: 'Return the results as JSON',
       exclusive: ['table'],
     }),
   }

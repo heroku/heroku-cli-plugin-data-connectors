@@ -14,7 +14,7 @@ export default class ConnectorsInfo extends BaseCommand {
 
   static flags = {
     json: flags.boolean({
-      description: 'output in json format',
+      description: 'Return the results as JSON',
     }),
   }
 
