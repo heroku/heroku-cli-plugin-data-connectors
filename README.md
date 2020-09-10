@@ -23,7 +23,7 @@ $ npm install -g @heroku-cli/plugin-data-connectors
 $ heroku COMMAND
 running command...
 $ heroku (-v|--version|version)
-@heroku-cli/plugin-data-connectors/0.2.0 darwin-x64 node-v12.15.0
+@heroku-cli/plugin-data-connectors/0.2.0 darwin-x64 node-v10.22.0
 $ heroku --help [COMMAND]
 USAGE
   $ heroku COMMAND
@@ -53,8 +53,11 @@ OPTIONS
   -a, --app=app        app to run command against
   -r, --remote=remote  git remote of app to use
   --addon=addon        The ID or name for the addon your your connector is attached to
-  --json               Return the results as json
+  --json               Return the results as JSON
   --table              Return the results as a table
+
+DESCRIPTION
+  Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors
 
 ALIASES
   $ heroku data:connectors:list
@@ -82,6 +85,9 @@ OPTIONS
   --source=source    (required) The name or ID of the database instance whose change data you want to store
   --store=store      (required) The name or ID of the database instance that will store the change data
 
+DESCRIPTION
+  Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors
+
 EXAMPLES
   $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts 
   --table public.comments
@@ -93,7 +99,7 @@ _See code: [src/commands/data/connectors/create.ts](https://github.com/heroku/he
 
 ## `heroku data:connectors:destroy [CONNECTOR]`
 
-destroy a Data Connector
+Destroy a Data Connector
 
 ```
 USAGE
@@ -101,6 +107,9 @@ USAGE
 
 OPTIONS
   --confirm=confirm  confirms destroying the connector if passed in
+
+DESCRIPTION
+  Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors
 
 EXAMPLES
   $ heroku data:connectors:destroy gentle-connector-1234
@@ -111,14 +120,17 @@ _See code: [src/commands/data/connectors/destroy.ts](https://github.com/heroku/h
 
 ## `heroku data:connectors:info [CONNECTOR]`
 
-get information about a Data Connector
+Get information about a Data Connector
 
 ```
 USAGE
   $ heroku data:connectors:info [CONNECTOR]
 
 OPTIONS
-  --json  output in json format
+  --json  Return the results as JSON
+
+DESCRIPTION
+  Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors
 
 EXAMPLES
   $ heroku data:connectors:info gentle-connector-1234
@@ -135,6 +147,9 @@ Pause change event creation on a Data Connector
 USAGE
   $ heroku data:connectors:pause [CONNECTOR]
 
+DESCRIPTION
+  Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors
+
 EXAMPLE
   $ heroku data:connectors:pause gentle-connector-1234
 ```
@@ -149,6 +164,9 @@ Resume change event creation on a Data Connector
 USAGE
   $ heroku data:connectors:resume [CONNECTOR]
 
+DESCRIPTION
+  Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors
+
 EXAMPLE
   $ heroku data:connectors:resume gentle-connector-1234
 ```
@@ -157,7 +175,7 @@ _See code: [src/commands/data/connectors/resume.ts](https://github.com/heroku/he
 
 ## `heroku data:connectors:update [CONNECTOR]`
 
-update the settings for a Data Connector
+Update the settings for a Data Connector
 
 ```
 USAGE
@@ -167,8 +185,7 @@ OPTIONS
   --setting=setting  (required)
 
 DESCRIPTION
-  See Dev Center for available settings: 
-  https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration
+  Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration
 
 EXAMPLE
   $ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue
@@ -178,11 +195,14 @@ _See code: [src/commands/data/connectors/update.ts](https://github.com/heroku/he
 
 ## `heroku data:connectors:wait [CONNECTOR]`
 
-wait for your Data Connector to be provisioned
+Wait for your Data Connector to be provisioned
 
 ```
 USAGE
   $ heroku data:connectors:wait [CONNECTOR]
+
+DESCRIPTION
+  Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors
 
 EXAMPLE
   $ heroku data:connectors:wait gentle-connector-1234
