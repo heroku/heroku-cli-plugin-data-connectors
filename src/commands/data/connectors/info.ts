@@ -5,7 +5,7 @@ import cli from 'cli-ux'
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsInfo extends BaseCommand {
-  static description = 'get information about a Data Connector'
+  static description = 'Get information about a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors'
 
   static examples = [
     '$ heroku data:connectors:info gentle-connector-1234',
@@ -14,7 +14,7 @@ export default class ConnectorsInfo extends BaseCommand {
 
   static flags = {
     json: flags.boolean({
-      description: 'output in json format',
+      description: 'Return the results as JSON',
     }),
   }
 

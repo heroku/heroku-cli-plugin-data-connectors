@@ -5,7 +5,7 @@ import {cli} from 'cli-ux'
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsCreate extends BaseCommand {
-  static description = 'create a new Data Connector'
+  static description = 'create a new Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors'
 
   static flags = {
     source: flags.string({

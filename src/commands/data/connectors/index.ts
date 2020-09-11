@@ -14,7 +14,7 @@ type ConnectorInfo = Pick<
 >
 
 export default class ConnectorsList extends BaseCommand {
-  static description = 'List all Data Connectors for a particular app or addon'
+  static description = 'List all Data Connectors for a particular app or addon\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors'
 
   static aliases = [
     'data:connectors:list',
@@ -37,7 +37,7 @@ export default class ConnectorsList extends BaseCommand {
       exclusive: ['json'],
     }),
     json: flags.boolean({
-      description: 'Return the results as json',
+      description: 'Return the results as JSON',
       exclusive: ['table'],
     }),
   }

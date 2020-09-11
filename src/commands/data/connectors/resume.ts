@@ -2,7 +2,7 @@ import {cli} from 'cli-ux'
 import BaseCommand from '../../../lib/base'
 
 export default class ConnectorsResume extends BaseCommand {
-  static description = 'Resume change event creation on a Data Connector'
+  static description = 'Resume change event creation on a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors'
 
   static examples = [
     '$ heroku data:connectors:resume gentle-connector-1234',

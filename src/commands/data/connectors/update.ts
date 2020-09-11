@@ -9,9 +9,7 @@ interface Dict<T> {
 }
 
 export default class ConnectorsUpdate extends BaseCommand {
-  static description = `update the settings for a Data Connector
-
-    See Dev Center for available settings: https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration`
+  static description = 'Update the settings for a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration'
 
   static examples = [
     '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue',

@@ -4,7 +4,7 @@ import {flags} from '@heroku-cli/command'
 import BaseCommand, {confirmConnector, PostgresConnector} from '../../../lib/base'
 
 export default class ConnectorsDestroy extends BaseCommand {
-  static description = 'destroy a Data Connector'
+  static description = 'Destroy a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors'
 
   static args = [
     {
