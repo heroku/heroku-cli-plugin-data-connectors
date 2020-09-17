@@ -103,7 +103,7 @@ Excluded Columns: public.users.password`
       const expectedOutput = `=== Data Connector info for ${appName}
 Connector Name       Kafka Add-On       Postgres Add-On Tables Excluded Columns
 brave-connector-358… kafka-metric-96658 postgresql-rec… [ 'pu… []
-sweet-connector-834… kafka-metric-96658 postgresql-rec… [ 'pu… [ 'public.users.password' ]`
+sweet-connector-834… kafka-metric-96658 postgresql-rec… [ 'pu… [ 'public.users…`
 
       ctx.stdout.split('\n').forEach(v => {
         expect(expectedOutput.replace(/\s+/g, ' ').trim()).to.include(v.replace(/\s+/g, ' ').trim())
