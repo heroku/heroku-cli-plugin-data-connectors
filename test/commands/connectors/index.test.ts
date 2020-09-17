@@ -106,7 +106,7 @@ brave-connector-35864 kafka-metric-96658 postgresql-rectangular-… [ 'pu… []
 sweet-connector-83451 kafka-metric-96658 postgresql-rectangular-… [ 'pu… [ 'public.users.password' ]`
 
       ctx.stdout.split('\n').forEach(v => {
-        expect(expectedOutput).to.include(v.trim())
+        expect(expectedOutput.replace(/\s+/g, ' ')).to.include(v.replace(/\s+/g, ' ').trim())
       })
     })
   })
