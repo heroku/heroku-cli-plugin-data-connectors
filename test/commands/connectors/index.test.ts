@@ -101,12 +101,12 @@ Excluded Columns: public.users.password`
     .command(['data:connectors', `--app=${appName}`, '--table'])
     .it('returns the correct table output', ctx => {
       const expectedOutput = `=== Data Connector info for ${appName}
-Connector Name        Kafka Add-On       Postgres Add-On          Tables Excluded Columns
-brave-connector-35864 kafka-metric-96658 postgresql-rectangular-… [ 'pu… []
-sweet-connector-83451 kafka-metric-96658 postgresql-rectangular-… [ 'pu… [ 'public.users.password' ]`
+Connector Name       Kafka Add-On       Postgres Add-On Tables Excluded Columns
+brave-connector-358… kafka-metric-96658 postgresql-rec… [ 'pu… []
+sweet-connector-834… kafka-metric-96658 postgresql-rec… [ 'pu… [ 'public.users.password' ]`
 
       ctx.stdout.split('\n').forEach(v => {
-        expect(expectedOutput.replace(/\s+/g, ' ')).to.include(v.replace(/\s+/g, ' ').trim())
+        expect(expectedOutput.replace(/\s+/g, ' ').trim()).to.include(v.replace(/\s+/g, ' ').trim())
       })
     })
   })
