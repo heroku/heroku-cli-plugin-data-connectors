@@ -9,6 +9,8 @@ type ConnectorInfo = Pick<
   'postgres_addon' |
   'name' |
   'uuid' |
+  'tables' |
+  'excluded_columns' |
   'kafka_app' |
   'postgres_app'
 >
@@ -96,13 +98,17 @@ export default class ConnectorsList extends BaseCommand {
           header: 'Postgres Add-On',
           get: row => row.postgres_addon.name,
         },
+        tables: {header: 'Tables'},
+        excluded_columns: {header: 'Excluded Columns'},
       })
     } else {
-      connectorInfo.forEach(v => {
+      connectorInfo.forEach(c => {
         cli.styledObject({
-          'Connector Name': v.name,
-          'Kafka Add-On': v.kafka_addon.name,
-          'Postgres Add-On': v.postgres_addon.name,
+          'Connector Name': c.name,
+          'Kafka Add-On': c.kafka_addon.name,
+          'Postgres Add-On': c.postgres_addon.name,
+          Tables: c.tables,
+          'Excluded Columns': c.excluded_columns,
         })
         this.log()
       })
