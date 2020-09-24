@@ -1,6 +1,7 @@
 import {flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
 import {cli} from 'cli-ux'
+import {fetchAddon} from '../../../fetcher'
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 type ConnectorInfo = Pick<
@@ -49,7 +50,14 @@ export default class ConnectorsList extends BaseCommand {
 
     let connectorInfo: Array<ConnectorInfo>
 
-    if (flags.app) {
+    if (flags.addon) {
+      const addon = await fetchAddon(this.heroku, flags.addon, flags.app)
+      const {body: response} = await this.shogun.get<Array<ConnectorInfo>>(
+        `/data/cdc/v0/addons/${addon.id}`,
+        this.shogun.defaults
+      )
+      connectorInfo = response
+    } else if (flags.app) {
       // make sure we have app id even if they passed app name
       const {body: app} = await this.heroku.get<Heroku.App>(`/apps/${flags.app}`)
 
@@ -59,20 +67,6 @@ export default class ConnectorsList extends BaseCommand {
       )
 
       connectorInfo = response.body
-    } else if (flags.addon) {
-      // make sure we have addon id even if the addon name
-      const {body: [addon]} =  await this.heroku.post<Array<Heroku.AddOn>>('/actions/addons/resolve', {
-        body: {
-          addon: flags.addon,
-        },
-      })
-
-      const {body: response} = await this.shogun.get<Array<ConnectorInfo>>(
-        `/data/cdc/v0/addons/${addon.id}`,
-        this.shogun.defaults
-      )
-
-      connectorInfo = response
     } else {
       cli.error('You must pass either the --app or --addon flag')
     }

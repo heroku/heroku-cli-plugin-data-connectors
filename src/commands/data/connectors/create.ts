@@ -1,6 +1,7 @@
 import color from '@heroku-cli/color'
 import {flags} from '@heroku-cli/command'
 import {cli} from 'cli-ux'
+import {fetchAddon} from '../../../fetcher'
 
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
@@ -8,13 +9,14 @@ export default class ConnectorsCreate extends BaseCommand {
   static description = 'create a new Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors'
 
   static flags = {
+    app: flags.app(),
     source: flags.string({
       required: true,
-      description: 'The name or ID of the database instance whose change data you want to store',
+      description: 'The name of the database add-on whose change data you want to store',
     }),
     store: flags.string({
       required: true,
-      description: 'The name or ID of the database instance that will store the change data',
+      description: 'The name of the database add-on that will store the change data',
     }),
     name: flags.string({
       required: false,
@@ -44,17 +46,19 @@ export default class ConnectorsCreate extends BaseCommand {
 
   async run() {
     const {flags} = this.parse(ConnectorsCreate)
-    const {source: postgres, store: kafka} = flags
     const tables = flags.table
     const excluded = flags.exclude || []
     const platformVersion = flags['platform-version'] || ''
     const name = flags.name || ''
+    const kafka = await fetchAddon(this.heroku, flags.store, flags.app)
+    const postgres = await fetchAddon(this.heroku, flags.source, flags.app)
 
     cli.action.start('Provisioning Data Connector')
-    const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka}`, {
+
+    const {body: res} = await this.shogun.post<PostgresConnector>(`/data/cdc/v0/kafka_tenants/${kafka.id}`, {
       ...this.shogun.defaults,
       body: {
-        postgres_addon_uuid: postgres,
+        postgres_addon_uuid: postgres.id,
         tables,
         excluded_columns: excluded,
         platform_version: platformVersion,
