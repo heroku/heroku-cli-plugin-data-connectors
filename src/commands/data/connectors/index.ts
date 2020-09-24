@@ -1,7 +1,7 @@
 import {flags} from '@heroku-cli/command'
 import * as Heroku from '@heroku-cli/schema'
 import {cli} from 'cli-ux'
-import {addon as fetchAddon} from '../../../fetcher'
+import {fetchAddon} from '../../../fetcher'
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
 type ConnectorInfo = Pick<

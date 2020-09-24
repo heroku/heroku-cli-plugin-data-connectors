@@ -1,7 +1,7 @@
 import color from '@heroku-cli/color'
 import {flags} from '@heroku-cli/command'
 import {cli} from 'cli-ux'
-import {addon as fetchAddon} from '../../../fetcher'
+import {fetchAddon} from '../../../fetcher'
 
 import BaseCommand, {PostgresConnector} from '../../../lib/base'
 
