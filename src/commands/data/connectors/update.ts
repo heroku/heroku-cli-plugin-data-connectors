@@ -73,15 +73,20 @@ export default class ConnectorsUpdate extends BaseCommand {
       return acc
     }, {})
 
+    const {body: res} = await this.shogun.get<PostgresConnector>(
+      `/data/cdc/v0/connectors/${args.connector}`,
+      this.shogun.defaults
+    )
+    const tables = res.tables.concat(tablesToAdd).filter(t => !tablesToRemove.includes(t))
+    const excludedColumns = res.excluded_columns.concat(excludedColumnsToAdd).filter(c => !excludedColumnsToRemove.includes(c))
+
     cli.action.start(`Updating Data Connector ${args.connector}`)
     try {
       await this.shogun.patch<PostgresConnector>(`/data/cdc/v0/connectors/${args.connector}`, {
         body: {
           settings: params,
-          tables_to_add: tablesToAdd,
-          tables_to_remove: tablesToRemove,
-          excluded_columns_to_add: excludedColumnsToAdd,
-          excluded_columns_to_remove: excludedColumnsToRemove,
+          tables: tables,
+          excluded_columns: excludedColumns,
         },
         ...this.shogun.defaults,
       })
