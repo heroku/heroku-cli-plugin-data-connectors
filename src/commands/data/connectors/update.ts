@@ -79,8 +79,8 @@ export default class ConnectorsUpdate extends BaseCommand {
         `/data/cdc/v0/connectors/${args.connector}`,
         this.shogun.defaults
       )
-      const tables = res.tables.concat(tablesToAdd).filter(t => !tablesToRemove.includes(t))
-      const excludedColumns = res.excluded_columns.concat(excludedColumnsToAdd).filter(c => !excludedColumnsToRemove.includes(c))
+      const tables = [...new Set(res.tables.concat(tablesToAdd).filter(t => !tablesToRemove.includes(t)))]
+      const excludedColumns = [...new Set(res.excluded_columns.concat(excludedColumnsToAdd).filter(c => !excludedColumnsToRemove.includes(c)))]
       await this.shogun.patch<PostgresConnector>(`/data/cdc/v0/connectors/${args.connector}`, {
         body: {
           settings: params,
