@@ -34,25 +34,21 @@ export default class ConnectorsUpdate extends BaseCommand {
       },
     }),
     addTable: flags.string({
-      char: 't',
       description: 'Tables to add',
       multiple: true,
       required: false,
     }),
     removeTable: flags.string({
-      char: 't',
       description: 'Tables to remove',
       multiple: true,
       required: false,
     }),
     addExclude: flags.string({
-      char: 't',
       description: 'Columns to exclude',
       multiple: true,
       required: false,
     }),
     removeExclude: flags.string({
-      char: 't',
       description: 'Columns to no longer exclude',
       multiple: true,
       required: false,
