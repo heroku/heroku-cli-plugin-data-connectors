@@ -172,4 +172,46 @@ describe('data:connectors:update', () => {
       expect(ctx.stdout.trim()).to.include(expectedOutput)
     })
   })
+
+  describe('handles duplicates', () => {
+    const expectedOutput = `Your Data Connector is now being updated.\nRun heroku data:connectors:wait ${connectorId} to check the update process.`
+    const tables = [
+      'public.posts',
+      'public.comments',
+      'public.newtable',
+    ]
+    const excluded_columns = [
+      'public.posts.foo',
+      'public.comments.bar',
+      'public.newtable.col',
+    ]
+    const settings = {}
+    test
+    .nock('https://postgres-api.heroku.com', api => {
+      api
+      .patch(`/data/cdc/v0/connectors/${connectorId}`, {
+        settings,
+        tables,
+        excluded_columns,
+      })
+      .reply(200)
+    })
+    .nock('https://postgres-api.heroku.com', api => {
+      api
+      .get(`/data/cdc/v0/connectors/${connectorId}`)
+      .reply(200, connector)
+    })
+    .stdout()
+    .command([
+      'data:connectors:update',
+      connectorId,
+      '--addTable=public.newtable',
+      '--addTable=public.newtable',
+      '--addExclude=public.newtable.col',
+      '--addExclude=public.newtable.col',
+    ])
+    .it('works', ctx => {
+      expect(ctx.stdout.trim()).to.include(expectedOutput)
+    })
+  })
 })
