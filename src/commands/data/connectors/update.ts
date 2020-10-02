@@ -12,7 +12,7 @@ export default class ConnectorsUpdate extends BaseCommand {
   static description = 'Update the settings, tables and columns to exclude for a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration'
 
   static examples = [
-    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue --add-table public.posts --add-table public.people --remove-table public.people --add-exclude public.posts.key --remove-exclude public.posts.key',
+    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue --add-table public.posts --add-table public.people --remove-table public.messages --add-exclude public.posts.key --remove-exclude public.parcels.key',
   ]
 
   static args = [
