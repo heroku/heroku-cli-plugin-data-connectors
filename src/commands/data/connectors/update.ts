@@ -12,7 +12,7 @@ export default class ConnectorsUpdate extends BaseCommand {
   static description = 'Update the settings, tables, and columns to exclude for a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration'
 
   static examples = [
-    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue --addTable public.posts --addTable public.people --removeTable public.messages --excludeColumn public.posts.key --removeExcludedColumn public.parcels.key',
+    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue --add-table public.posts --add-table public.people --remove-table public.messages --exclude-column public.posts.key --remove-excluded-column public.parcels.key',
   ]
 
   static args = [
@@ -33,22 +33,22 @@ export default class ConnectorsUpdate extends BaseCommand {
         return [key, value]
       },
     }),
-    addTable: flags.string({
+    'add-table': flags.string({
       description: 'Tables to add',
       multiple: true,
       required: false,
     }),
-    removeTable: flags.string({
+    'remove-table': flags.string({
       description: 'Tables to remove',
       multiple: true,
       required: false,
     }),
-    excludeColumn: flags.string({
+    'exclude-column': flags.string({
       description: 'Columns to exclude',
       multiple: true,
       required: false,
     }),
-    removeExcludedColumn: flags.string({
+    'remove-excluded-column': flags.string({
       description: 'Columns to no longer exclude',
       multiple: true,
       required: false,
@@ -59,10 +59,10 @@ export default class ConnectorsUpdate extends BaseCommand {
     const {args, flags} = this.parse(ConnectorsUpdate)
 
     const setting = flags.setting || []
-    const tablesToAdd = flags.addTable || []
-    const tablesToRemove = flags.removeTable || []
-    const excludedColumnsToAdd = flags.excludeColumn || []
-    const excludedColumnsToRemove = flags.removeExcludedColumn || []
+    const tablesToAdd = flags['add-table'] || []
+    const tablesToRemove = flags['remove-table'] || []
+    const excludedColumnsToAdd = flags['exclude-column'] || []
+    const excludedColumnsToRemove = flags['remove-excluded-column'] || []
 
     const params = setting.reduce((acc: Dict<string>, [key, value]) => {
       acc[key] = value

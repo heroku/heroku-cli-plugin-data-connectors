@@ -127,8 +127,8 @@ describe('data:connectors:update', () => {
     .command([
       'data:connectors:update',
       connectorId,
-      '--addTable=public.newtable',
-      '--removeTable=public.comments',
+      '--add-table=public.newtable',
+      '--remove-table=public.comments',
     ])
     .it('works', ctx => {
       expect(ctx.stdout.trim()).to.include(expectedOutput)
@@ -165,8 +165,8 @@ describe('data:connectors:update', () => {
     .command([
       'data:connectors:update',
       connectorId,
-      '--excludeColumn=public.comments.newcolumns',
-      '--removeExcludedColumn=public.comments.bar',
+      '--exclude-column=public.comments.newcolumns',
+      '--remove-excluded-column=public.comments.bar',
     ])
     .it('works', ctx => {
       expect(ctx.stdout.trim()).to.include(expectedOutput)
@@ -205,10 +205,10 @@ describe('data:connectors:update', () => {
     .command([
       'data:connectors:update',
       connectorId,
-      '--addTable=public.newtable',
-      '--addTable=public.newtable',
-      '--excludeColumn=public.newtable.col',
-      '--excludeColumn=public.newtable.col',
+      '--add-table=public.newtable',
+      '--add-table=public.newtable',
+      '--exclude-column=public.newtable.col',
+      '--exclude-column=public.newtable.col',
     ])
     .it('works', ctx => {
       expect(ctx.stdout.trim()).to.include(expectedOutput)
