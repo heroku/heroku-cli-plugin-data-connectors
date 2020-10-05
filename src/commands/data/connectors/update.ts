@@ -12,7 +12,7 @@ export default class ConnectorsUpdate extends BaseCommand {
   static description = 'Update the settings, tables, and columns to exclude for a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration'
 
   static examples = [
-    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue --add-table public.posts --add-table public.people --remove-table public.messages --add-exclude public.posts.key --remove-exclude public.parcels.key',
+    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue --addTable public.posts --addTable public.people --removeTable public.messages --excludeColumn public.posts.key --removeExcludedColumn public.parcels.key',
   ]
 
   static args = [
@@ -43,12 +43,12 @@ export default class ConnectorsUpdate extends BaseCommand {
       multiple: true,
       required: false,
     }),
-    addExclude: flags.string({
+    excludeColumn: flags.string({
       description: 'Columns to exclude',
       multiple: true,
       required: false,
     }),
-    removeExclude: flags.string({
+    removeExcludedColumn: flags.string({
       description: 'Columns to no longer exclude',
       multiple: true,
       required: false,
@@ -61,8 +61,8 @@ export default class ConnectorsUpdate extends BaseCommand {
     const setting = flags.setting || []
     const tablesToAdd = flags.addTable || []
     const tablesToRemove = flags.removeTable || []
-    const excludedColumnsToAdd = flags.addExclude || []
-    const excludedColumnsToRemove = flags.removeExclude || []
+    const excludedColumnsToAdd = flags.excludeColumn || []
+    const excludedColumnsToRemove = flags.removeExcludedColumn || []
 
     const params = setting.reduce((acc: Dict<string>, [key, value]) => {
       acc[key] = value

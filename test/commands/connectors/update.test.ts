@@ -165,8 +165,8 @@ describe('data:connectors:update', () => {
     .command([
       'data:connectors:update',
       connectorId,
-      '--addExclude=public.comments.newcolumns',
-      '--removeExclude=public.comments.bar',
+      '--excludeColumn=public.comments.newcolumns',
+      '--removeExcludedColumn=public.comments.bar',
     ])
     .it('works', ctx => {
       expect(ctx.stdout.trim()).to.include(expectedOutput)
@@ -207,8 +207,8 @@ describe('data:connectors:update', () => {
       connectorId,
       '--addTable=public.newtable',
       '--addTable=public.newtable',
-      '--addExclude=public.newtable.col',
-      '--addExclude=public.newtable.col',
+      '--excludeColumn=public.newtable.col',
+      '--excludeColumn=public.newtable.col',
     ])
     .it('works', ctx => {
       expect(ctx.stdout.trim()).to.include(expectedOutput)
