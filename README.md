@@ -67,7 +67,7 @@ EXAMPLES
   heroku data:connectors --addon=your-postgres-addon --table
 ```
 
-_See code: [src/commands/data/connectors/index.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.0/src/commands/data/connectors/index.ts)_
+_See code: [src/commands/data/connectors/index.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.1/src/commands/data/connectors/index.ts)_
 
 ## `heroku data:connectors:create`
 
@@ -95,7 +95,7 @@ EXAMPLES
   --exclude-column public.users.password
 ```
 
-_See code: [src/commands/data/connectors/create.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.0/src/commands/data/connectors/create.ts)_
+_See code: [src/commands/data/connectors/create.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.1/src/commands/data/connectors/create.ts)_
 
 ## `heroku data:connectors:destroy [CONNECTOR]`
 
@@ -116,7 +116,7 @@ EXAMPLES
   $ heroku data:connectors:destroy gentle-connector-1234 --confirm gentle-connector-1234
 ```
 
-_See code: [src/commands/data/connectors/destroy.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.0/src/commands/data/connectors/destroy.ts)_
+_See code: [src/commands/data/connectors/destroy.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.1/src/commands/data/connectors/destroy.ts)_
 
 ## `heroku data:connectors:info [CONNECTOR]`
 
@@ -137,7 +137,7 @@ EXAMPLES
   $ heroku data:connectors:info gentle-connector-1234 --json
 ```
 
-_See code: [src/commands/data/connectors/info.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.0/src/commands/data/connectors/info.ts)_
+_See code: [src/commands/data/connectors/info.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.1/src/commands/data/connectors/info.ts)_
 
 ## `heroku data:connectors:pause [CONNECTOR]`
 
@@ -154,7 +154,7 @@ EXAMPLE
   $ heroku data:connectors:pause gentle-connector-1234
 ```
 
-_See code: [src/commands/data/connectors/pause.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.0/src/commands/data/connectors/pause.ts)_
+_See code: [src/commands/data/connectors/pause.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.1/src/commands/data/connectors/pause.ts)_
 
 ## `heroku data:connectors:resume [CONNECTOR]`
 
@@ -171,7 +171,7 @@ EXAMPLE
   $ heroku data:connectors:resume gentle-connector-1234
 ```
 
-_See code: [src/commands/data/connectors/resume.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.0/src/commands/data/connectors/resume.ts)_
+_See code: [src/commands/data/connectors/resume.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.1/src/commands/data/connectors/resume.ts)_
 
 ## `heroku data:connectors:update [CONNECTOR]`
 
@@ -197,7 +197,7 @@ EXAMPLE
   --remove-excluded-column public.parcels.key
 ```
 
-_See code: [src/commands/data/connectors/update.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.0/src/commands/data/connectors/update.ts)_
+_See code: [src/commands/data/connectors/update.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.1/src/commands/data/connectors/update.ts)_
 
 ## `heroku data:connectors:wait [CONNECTOR]`
 
@@ -214,5 +214,5 @@ EXAMPLE
   $ heroku data:connectors:wait gentle-connector-1234
 ```
 
-_See code: [src/commands/data/connectors/wait.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.0/src/commands/data/connectors/wait.ts)_
+_See code: [src/commands/data/connectors/wait.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v1.0.1/src/commands/data/connectors/wait.ts)_
 <!-- commandsstop -->
