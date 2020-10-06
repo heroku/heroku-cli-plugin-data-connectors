@@ -28,7 +28,7 @@ export default class ConnectorsCreate extends BaseCommand {
       multiple: true,
       required: true,
     }),
-    exclude: flags.string({
+    'exclude-column': flags.string({
       description: 'Columns to exclude',
       multiple: true,
     }),
@@ -41,13 +41,13 @@ export default class ConnectorsCreate extends BaseCommand {
 
   static examples = [
     '$ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts --table public.comments',
-    '$ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users --exclude public.users.password',
+    '$ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users --exclude-column public.users.password',
   ]
 
   async run() {
     const {flags} = this.parse(ConnectorsCreate)
     const tables = flags.table
-    const excluded = flags.exclude || []
+    const excluded = flags['exclude-column'] || []
     const platformVersion = flags['platform-version'] || ''
     const name = flags.name || ''
     const kafka = await fetchAddon(this.heroku, flags.store, flags.app)

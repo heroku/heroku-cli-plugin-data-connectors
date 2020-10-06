@@ -53,7 +53,7 @@ describe('data:connectors:create', () => {
     `--source=${postgresName}`,
     '--table=public.foo',
     '--table=public.bar',
-    '--exclude=public.foo.column1',
+    '--exclude-column=public.foo.column1',
     '--name=my-cdc-connector',
   ])
   .it('works', ctx => {

@@ -9,10 +9,10 @@ interface Dict<T> {
 }
 
 export default class ConnectorsUpdate extends BaseCommand {
-  static description = 'Update the settings for a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration'
+  static description = 'Update the settings, tables, and columns to exclude for a Data Connector\nRead more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration'
 
   static examples = [
-    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue',
+    '$ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue --add-table public.posts --add-table public.people --remove-table public.messages --exclude-column public.posts.key --remove-excluded-column public.parcels.key',
   ]
 
   static args = [
@@ -24,7 +24,7 @@ export default class ConnectorsUpdate extends BaseCommand {
   static flags = {
     setting: flags.string({
       multiple: true,
-      required: true,
+      required: false,
       parse: input => {
         const [key, value] = input.split('=')
         if (!key || !value) {
@@ -33,12 +33,36 @@ export default class ConnectorsUpdate extends BaseCommand {
         return [key, value]
       },
     }),
+    'add-table': flags.string({
+      description: 'Tables to add',
+      multiple: true,
+      required: false,
+    }),
+    'remove-table': flags.string({
+      description: 'Tables to remove',
+      multiple: true,
+      required: false,
+    }),
+    'exclude-column': flags.string({
+      description: 'Columns to exclude',
+      multiple: true,
+      required: false,
+    }),
+    'remove-excluded-column': flags.string({
+      description: 'Columns to no longer exclude',
+      multiple: true,
+      required: false,
+    }),
   }
 
   async run() {
     const {args, flags} = this.parse(ConnectorsUpdate)
 
     const setting = flags.setting || []
+    const tablesToAdd = flags['add-table'] || []
+    const tablesToRemove = flags['remove-table'] || []
+    const excludedColumnsToAdd = flags['exclude-column'] || []
+    const excludedColumnsToRemove = flags['remove-excluded-column'] || []
 
     const params = setting.reduce((acc: Dict<string>, [key, value]) => {
       acc[key] = value
@@ -47,9 +71,17 @@ export default class ConnectorsUpdate extends BaseCommand {
 
     cli.action.start(`Updating Data Connector ${args.connector}`)
     try {
+      const {body: res} = await this.shogun.get<PostgresConnector>(
+        `/data/cdc/v0/connectors/${args.connector}`,
+        this.shogun.defaults
+      )
+      const tables = [...new Set(res.tables.concat(tablesToAdd).filter(t => !tablesToRemove.includes(t)))]
+      const excludedColumns = [...new Set(res.excluded_columns.concat(excludedColumnsToAdd).filter(c => !excludedColumnsToRemove.includes(c)))]
       await this.shogun.patch<PostgresConnector>(`/data/cdc/v0/connectors/${args.connector}`, {
         body: {
           settings: params,
+          tables: tables,
+          excluded_columns: excludedColumns,
         },
         ...this.shogun.defaults,
       })
