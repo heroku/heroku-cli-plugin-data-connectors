@@ -19,7 +19,7 @@ Center](https://devcenter.heroku.com/articles/heroku-data-connectors).
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g @heroku-cli/plugin-data-connectors
+$ heroku plugin:install data-connectors
 $ heroku COMMAND
 running command...
 $ heroku (-v|--version|version)
