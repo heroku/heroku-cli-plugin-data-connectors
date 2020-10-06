@@ -17,7 +17,6 @@ Center](https://devcenter.heroku.com/articles/heroku-data-connectors).
 * [Commands](#commands)
 <!-- tocstop -->
 # Usage
-<!-- usage -->
 ```sh-session
 $ heroku plugins:install data-connectors
 $ heroku COMMAND
@@ -79,12 +78,12 @@ USAGE
   $ heroku data:connectors:create
 
 OPTIONS
-  -a, --app=app      app to run command against
-  -t, --table=table  (required) Tables to include
-  --exclude=exclude  Columns to exclude
-  --name=name        Name of the connector
-  --source=source    (required) The name of the database add-on whose change data you want to store
-  --store=store      (required) The name of the database add-on that will store the change data
+  -a, --app=app                    app to run command against
+  -t, --table=table                (required) Tables to include
+  --exclude-column=exclude-column  Columns to exclude
+  --name=name                      Name of the connector
+  --source=source                  (required) The name of the database add-on whose change data you want to store
+  --store=store                    (required) The name of the database add-on that will store the change data
 
 DESCRIPTION
   Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors
@@ -93,7 +92,7 @@ EXAMPLES
   $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.posts 
   --table public.comments
   $ heroku data:connectors:create --store kafka-lovely-12345 --source postgresql-neato-98765 --table public.users 
-  --exclude public.users.password
+  --exclude-column public.users.password
 ```
 
 _See code: [src/commands/data/connectors/create.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.2.2/src/commands/data/connectors/create.ts)_
@@ -176,20 +175,26 @@ _See code: [src/commands/data/connectors/resume.ts](https://github.com/heroku/he
 
 ## `heroku data:connectors:update [CONNECTOR]`
 
-Update the settings for a Data Connector
+Update the settings, tables, and columns to exclude for a Data Connector
 
 ```
 USAGE
   $ heroku data:connectors:update [CONNECTOR]
 
 OPTIONS
-  --setting=setting  (required)
+  --add-table=add-table                            Tables to add
+  --exclude-column=exclude-column                  Columns to exclude
+  --remove-excluded-column=remove-excluded-column  Columns to no longer exclude
+  --remove-table=remove-table                      Tables to remove
+  --setting=setting
 
 DESCRIPTION
   Read more about this feature at https://devcenter.heroku.com/articles/heroku-data-connectors#update-configuration
 
 EXAMPLE
-  $ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue
+  $ heroku data:connectors:update gentle-connector-1234 --setting key=value --setting otherKey=otherValue --add-table 
+  public.posts --add-table public.people --remove-table public.messages --exclude-column public.posts.key 
+  --remove-excluded-column public.parcels.key
 ```
 
 _See code: [src/commands/data/connectors/update.ts](https://github.com/heroku/heroku-cli-plugin-data-connectors/blob/v0.2.2/src/commands/data/connectors/update.ts)_
